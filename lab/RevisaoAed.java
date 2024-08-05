@@ -1,19 +1,24 @@
-import java.util.Scanner;
-import javax.management.InvalidAttributeValueException;
-
 /**
- * @author Bernardo Alvim AKA alvimdev
+ * @author @alvimdev
  * Revisao de AEDs para Lab de Programação Modular
  */
+
+import java.util.Scanner;
+
 public class RevisaoAed {
 
   public static int fibLoop(int N) {
-    int a = 0, b = 1, c = a + b;
+    
+    /* De acordo com o GJS Guide, cada variável deve ser declarada em sua respectiva linha */
+    int a = 0;
+    int b = 1;
+    int c = a + b;
 
     if (N <= 0) {
       return 0;
     }
 
+    /* Em fors, as variaveis podem ser declaradas em sequencia na inicialização, caso necessário */
     for (int i = 0; i < N; i++) {
       c = a + b;
       a = b;
@@ -53,7 +58,7 @@ public class RevisaoAed {
       IMC imc = new IMC(peso, altura);
 
       System.out.println("IMC: " + imc.getImc());
-    } catch (Exception e) {
+    } catch (IllegalArgumentException e) {
       System.err.println(e.getMessage());
     }
 
@@ -86,9 +91,9 @@ class IMC {
     this.peso = peso;
   }
 
-  public float getImc() throws InvalidAttributeValueException {
+  public float getImc() throws IllegalArgumentException {
     if (peso <= 0 || altura <= 0) {
-      throw new InvalidAttributeValueException("O peso e a altura devem ser maiores que 0");
+      throw new IllegalArgumentException("O peso e a altura devem ser maiores que 0");
     }
 
     return peso / (altura * altura);
