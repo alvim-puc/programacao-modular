@@ -24,7 +24,7 @@ public class App {
 
       Imc imc = new Imc(peso, altura);
 
-      System.out.println("IMC: " + imc.getImc());
+      System.out.println(String.format("Seu IMC é: %.2f", imc.getImc()));
     } catch (IllegalArgumentException e) {
       System.err.println(e.getMessage());
     }
