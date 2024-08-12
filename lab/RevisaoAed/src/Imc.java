@@ -5,8 +5,8 @@ public class Imc {
   private float altura;
 
   Imc(float peso, float altura) {
-    this.peso = peso;
-    this.altura = altura;
+    this.setAltura(altura);
+    this.setPeso(peso);
   }
 
   public float getAltura() {
@@ -18,10 +18,18 @@ public class Imc {
   }
 
   public void setAltura(float altura) {
+    if (altura <= 0) {
+      throw new IllegalArgumentException("A altura deve ser maior do que 0.");
+    }
+
     this.altura = altura;
   }
 
   public void setPeso(float peso) {
+    if (peso <= 0) {
+      throw new IllegalArgumentException("O peso deve ser maior do que 0.");
+    }
+
     this.peso = peso;
   }
 
