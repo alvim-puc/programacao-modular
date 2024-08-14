@@ -4,7 +4,7 @@ public class Imc {
   private float peso;
   private float altura;
 
-  Imc(float peso, float altura) {
+  public Imc(float peso, float altura) {
     this.setAltura(altura);
     this.setPeso(peso);
   }

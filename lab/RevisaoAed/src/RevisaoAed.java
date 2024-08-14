@@ -11,13 +11,17 @@ public class RevisaoAed {
       return 0;
     }
 
+    if (N == 1 || N == 2) {
+      return 1;
+    }
+
     /* De acordo com o GJS Guide, cada variável deve ser declarada em sua respectiva linha */
     int a = 0;
     int b = 1;
     int c = a + b;
 
     /* Em fors, as variaveis podem ser declaradas em sequencia na inicialização, caso necessário */
-    for (int i = 0; i < N; i++) {
+    for (int i = 1; i < N; i++) {
       c = a + b;
       a = b;
       b = c;
@@ -31,8 +35,12 @@ public class RevisaoAed {
       throw new IllegalArgumentException("Não são permitidos números negativos");
     }
 
-    if (N == index) {
-      return c;
+    if (N == 1 || N == 2) {
+      return 1;
+    }
+
+    if (index == N) {
+      return b;
     }
 
     c = a + b;

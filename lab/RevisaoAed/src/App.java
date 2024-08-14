@@ -31,7 +31,7 @@ public class App {
           case 2:
             System.out.print("Digite um numero para calcular seu Fibonacci usando recursão: ");
             N = reader.nextInt();
-            System.out.println("Resultado: " + RevisaoAed.fibRec(N, 0, 1, 0, 0));
+            System.out.println("Resultado: " + RevisaoAed.fibRec(N, 0, 1, 2, 1));
             break;
           case 3:
             System.out.print("Insira seu peso: ");
