@@ -1,6 +1,8 @@
 package business;
 
 import java.time.LocalDate;
+import java.util.EnumSet;
+import java.util.function.IntPredicate;
 
 public class Pessoa {
   private String nome;
@@ -15,11 +17,47 @@ public class Pessoa {
   private int atividadeFisica;
   private int saude;
 
+  public Pessoa() {}
+
+  public Pessoa(
+      String nome,
+      float altura,
+      float peso,
+      LocalDate dataNascimento,
+      EstadoCivil estadoCivil,
+      FormacaoAcademica formacaoAcademica,
+      Profissao profissao,
+      boolean vidaSocial,
+      boolean hobby,
+      int atividadeFisica,
+      int saude) {
+
+    this.setNome(nome);
+    this.setAltura(altura);
+    this.setPeso(peso);
+    this.setDataNascimento(dataNascimento);
+    this.setEstadoCivil(estadoCivil);
+    this.setFormacaoAcademica(formacaoAcademica);
+    this.setProfissao(profissao);
+    this.setVidaSocial(vidaSocial);
+    this.setHobby(hobby);
+    this.setAtividadeFisica(atividadeFisica);
+    this.setSaude(saude);
+  }
+
   public String getNome() {
     return nome;
   }
 
   public void setNome(String nome) {
+    IntPredicate checkName =
+        letter ->
+            (letter >= 'a' && letter <= 'z') || (letter >= 'A' && letter <= 'Z') || letter == ' ';
+
+    if (!nome.chars().allMatch(checkName)) {
+      throw new IllegalArgumentException("Nome deve conter apenas letras e espaços");
+    }
+
     this.nome = nome;
   }
 
@@ -52,7 +90,7 @@ public class Pessoa {
   }
 
   public void setDataNascimento(LocalDate dataNascimento) {
-    if (LocalDate.now().isBefore(dataNascimento) || dataNascimento == null) {
+    if (LocalDate.now().isBefore(dataNascimento)) {
       throw new IllegalArgumentException("Data de nascimento deve ser menor que a data atual");
     }
 
@@ -64,7 +102,7 @@ public class Pessoa {
   }
 
   public void setEstadoCivil(EstadoCivil estadoCivil) {
-    if (estadoCivil == null) {
+    if (!EnumSet.allOf(EstadoCivil.class).contains(estadoCivil) || estadoCivil == null) {
       throw new IllegalArgumentException("Estado civil não pode ser nulo");
     }
 
@@ -76,7 +114,8 @@ public class Pessoa {
   }
 
   public void setFormacaoAcademica(FormacaoAcademica formacaoAcademica) {
-    if (formacaoAcademica == null) {
+    if (!EnumSet.allOf(FormacaoAcademica.class).contains(formacaoAcademica)
+        || formacaoAcademica == null) {
       throw new IllegalArgumentException("Formação acadêmica não pode ser nula");
     }
 
@@ -88,7 +127,7 @@ public class Pessoa {
   }
 
   public void setProfissao(Profissao profissao) {
-    if (profissao == null) {
+    if (!EnumSet.allOf(Profissao.class).contains(profissao) || profissao == null) {
       throw new IllegalArgumentException("Profissão não pode ser nula");
     }
 
@@ -134,5 +173,41 @@ public class Pessoa {
     }
 
     this.saude = saude;
+  }
+
+  public String toString() {
+    return ("Nome: "
+        + nome
+        + "\n"
+        + "Altura: "
+        + altura
+        + "\n"
+        + "Peso: "
+        + peso
+        + "\n"
+        + "Data de nascimento: "
+        + dataNascimento
+        + "\n"
+        + "Estado civil: "
+        + estadoCivil
+        + "\n"
+        + "Formação acadêmica: "
+        + formacaoAcademica
+        + "\n"
+        + "Profissão: "
+        + profissao
+        + "\n"
+        + "Vida social: "
+        + vidaSocial
+        + "\n"
+        + "Hobby: "
+        + hobby
+        + "\n"
+        + "Atividade física: "
+        + atividadeFisica
+        + "\n"
+        + "Saude: "
+        + saude
+        + "\n");
   }
 }
