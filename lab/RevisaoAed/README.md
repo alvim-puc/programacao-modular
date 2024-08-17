@@ -1,18 +1,31 @@
-## Getting Started
+## Revisão de Algoritmos e Lógica de Programação em Java
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+O objetivo desta tarefa é revisar os principais conceitos de Algoritmos e Lógica de Programação em Java.
 
-## Folder Structure
+### Requisitos
 
-The workspace contains two folders by default, where:
+### 1. Classe `RevisaoAed`
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+- **Nome da Classe**: `RevisaoAed`
+  - **Observação**: Obedeça exatamente o nome, incluindo maiúsculas e minúsculas.
+  
+- **Método `fibLoop`**:
+  - O método deve receber um número inteiro `n`.
+  - Deve calcular o enésimo termo da série de Fibonacci utilizando comandos iterativos (loops).
+  - O método deve retornar apenas o número inteiro resultante.
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+- **Método `fibRec`**:
+  - O método deve receber um número inteiro `n`.
+  - Deve calcular o enésimo termo da série de Fibonacci utilizando recursividade.
+  - O método deve retornar apenas o número inteiro resultante.
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+### 2. Classe `Imc`
 
-## Dependency Management
+- **Nome da Classe**: `Imc`
+  - Deve conter dois atributos: `peso` e `altura`.
+  
+- **Método `getImc`**:
+  - O método deve calcular o Índice de Massa Corporal (IMC) baseado no peso e na altura cadastrados.
+  - Deve retornar o valor do IMC.
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+---
