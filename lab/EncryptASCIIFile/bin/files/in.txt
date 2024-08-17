@@ -1,0 +1,6 @@
+Leitura de arquivos
+Existem diversos meios de se manipular arquivos na linguagem de programação Java. A classe java.io.File é responsável por representar arquivos ou diretórios do seu sistema de arquivos. Esta classe pode fornecer informações úteis assim como criar um novo arquivo, tamanho do arquivo, caminho absoluto, espaço livre em disco ou, ainda, excluí-lo.
+
+A linguagem Java oferece uma classe específica para a leitura do fluxo de bytes que compõem o arquivo, esta classe chama-se java.io.FileInputStream. A FileInputStream recebe em seu construtor uma referencia File, ou uma String que deve representar o caminho completo do arquivo, dessa forma podemos ler as informações que estão dentro do arquivo.
+
+Tanto a invocação do arquivo pela classe File, quanto diretamente pela FileInputStream fará com que o arquivo seja buscado no diretório em que o Java foi invocado (no caso do NetBeans vai ser dentro do diretório do projeto). Você também pode usar um caminho absoluto, para ler os arquivos que estão em outros diretórios do seu computador, ex: C:\arquivos\arquivo.txt.
