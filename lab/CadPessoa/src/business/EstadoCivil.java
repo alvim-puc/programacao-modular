@@ -1,10 +1,5 @@
 package business;
 
 public enum EstadoCivil {
-  SOLTEIRO,
-  CASADO,
-  UNIAO_ESTAVEL,
-  DIVORCIADO,
-  SEPARADO,
-  VIUVO
+  SOLTEIRO, CASADO, VIUVO, SEPARADO, DIVORCIADO, UNIAO_ESTAVEL
 }

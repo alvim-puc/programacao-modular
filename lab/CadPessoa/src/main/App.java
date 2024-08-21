@@ -7,7 +7,9 @@ import java.util.Scanner;
 import java.util.function.Consumer;
 
 public class App {
-  public static ArrayList<Pessoa> pessoas = new ArrayList<>();
+  public static final int MAX_PEOPLE = 55;
+  public static int lengthPeople = 0;
+  public static Pessoa[] pessoas = new Pessoa[MAX_PEOPLE];
 
   public static int menu(Scanner reader) {
     int choice;
@@ -15,7 +17,6 @@ public class App {
     System.out.println("---------------- MENU -----------------");
     System.out.println("1. Cadastrar uma pessoa");
     System.out.println("2. Listar pessoas");
-    System.out.println("3. Buscar pessoa");
     System.out.println("0. Sair");
     System.out.print("Opção: ");
     choice = reader.nextInt();
@@ -135,30 +136,13 @@ public class App {
   }
 
   public static void listPeople() {
-    if (pessoas.isEmpty()) {
+    if (lengthPeople <= 0) {
       System.err.println("Não há pessoas cadastradas.");
       return;
     }
 
-    for (Pessoa pessoa : pessoas) {
-      System.out.println(pessoa);
-    }
-  }
-
-  public static void findPerson(Scanner reader) {
-    try {
-      System.out.print("Digite o nome da pessoa que deseja buscar: ");
-      String nome = reader.nextLine();
-
-      Consumer<Pessoa> printer = pessoa -> System.out.println(pessoa);
-
-      System.out.println("Pessoas encontradas: ");
-      pessoas.stream()
-          .filter(pessoa -> pessoa.getNome().contains(nome))
-          .forEach(printer);
-
-    } catch (Exception e) {
-      System.err.println("Erro ao buscar pessoa.");
+    for (int i = 0; i < lengthPeople; i++) {
+      System.out.println(pessoas[i]);
     }
   }
 
@@ -181,10 +165,6 @@ public class App {
 
         case 2:
           listPeople();
-          break;
-
-        case 3:
-          findPerson(reader);
           break;
 
         default:

@@ -1,48 +1,49 @@
 package business;
 
 import java.time.LocalDate;
-import java.util.EnumSet;
-import java.util.function.IntPredicate;
 
 public class Pessoa {
   private String nome;
   private float altura;
-  private float peso;
+  private int peso;
+  private float renda;
   private LocalDate dataNascimento;
+  private String naturalidade;
+  private Genero genero;
   private EstadoCivil estadoCivil;
-  private FormacaoAcademica formacaoAcademica;
-  private Profissao profissao;
-  private boolean vidaSocial;
-  private boolean hobby;
-  private int atividadeFisica;
-  private int saude;
+  private Escolaridade escolaridade;
+  private Moradia moradia;
+  private Hobby hobby;
+  private boolean feliz;
 
   public Pessoa() {}
 
   public Pessoa(
       String nome,
       float altura,
-      float peso,
+      int peso,
+      float renda,
       LocalDate dataNascimento,
-      EstadoCivil estadoCivil,
-      FormacaoAcademica formacaoAcademica,
-      Profissao profissao,
-      boolean vidaSocial,
-      boolean hobby,
-      int atividadeFisica,
-      int saude) {
+      String naturalidade,
+      Genero genero,
+      EstadoCivil estadoCivil,  
+      Escolaridade escolaridade,
+      Moradia moradia,
+      Hobby hobby,
+      boolean feliz) {
 
     this.setNome(nome);
     this.setAltura(altura);
     this.setPeso(peso);
+    this.setRenda(renda);
     this.setDataNascimento(dataNascimento);
+    this.setNaturalidade(naturalidade);
+    this.setGenero(genero);
     this.setEstadoCivil(estadoCivil);
-    this.setFormacaoAcademica(formacaoAcademica);
-    this.setProfissao(profissao);
-    this.setVidaSocial(vidaSocial);
+    this.setEscolaridade(escolaridade);
+    this.setMoradia(moradia);
     this.setHobby(hobby);
-    this.setAtividadeFisica(atividadeFisica);
-    this.setSaude(saude);
+    this.setFeliz(feliz);
   }
 
   public String getNome() {
@@ -50,15 +51,20 @@ public class Pessoa {
   }
 
   public void setNome(String nome) {
-    IntPredicate checkName =
-        letter ->
-            (letter >= 'a' && letter <= 'z') || (letter >= 'A' && letter <= 'Z') || letter == ' ';
+    char[] cName = nome.toCharArray();
+    boolean hasSpecialChars = false;
 
-    if (!nome.chars().allMatch(checkName)) {
-      throw new IllegalArgumentException("Nome deve conter apenas letras e espaços");
+    for (char c : cName) {
+      if (!Character.isLetter(c) && !Character.isWhitespace(c)) {
+        hasSpecialChars = true;
+        break;
+      }
     }
 
-    this.nome = nome;
+    if (!hasSpecialChars) {
+      this.nome = nome;
+    }
+
   }
 
   public float getAltura() {
@@ -66,23 +72,32 @@ public class Pessoa {
   }
 
   public void setAltura(float altura) {
-    if (altura < 0 || altura > 3) {
-      throw new IllegalArgumentException("Altura deve ser maior que 0 e menor que 3 metros");
+    if (altura > 0 && altura < 2.6f) {
+      this.altura = altura;
     }
 
-    this.altura = altura;
   }
 
-  public float getPeso() {
+  public int getPeso() {
     return peso;
   }
 
-  public void setPeso(float peso) {
-    if (peso < 0 || peso > 500) {
-      throw new IllegalArgumentException("Peso deve ser maior que 0 e menor que 500 kg");
+  public void setPeso(int peso) {
+    if (peso > 0 && peso < 600) {
+      this.peso = peso;
     }
 
-    this.peso = peso;
+  }
+
+  public float getRenda() {
+    return renda;  
+  }
+
+  public void setRenda(float renda) {
+    if (renda > 0) {
+      this.renda = renda;
+    }
+
   }
 
   public LocalDate getDataNascimento() {
@@ -90,11 +105,39 @@ public class Pessoa {
   }
 
   public void setDataNascimento(LocalDate dataNascimento) {
-    if (LocalDate.now().isBefore(dataNascimento)) {
-      throw new IllegalArgumentException("Data de nascimento deve ser menor que a data atual");
+    if (LocalDate.now().isAfter(dataNascimento)) {
+      this.dataNascimento = dataNascimento;
     }
 
-    this.dataNascimento = dataNascimento;
+  }
+
+  public String getNaturalidade() {
+    return naturalidade;
+  }
+
+  public void setNaturalidade(String naturalidade) {
+    char[] cNaturalidade = naturalidade.toCharArray();
+    boolean hasSpecialChars = false;
+
+    for (char c : cNaturalidade) {
+      if (!Character.isLetter(c) && !Character.isWhitespace(c)) {
+        hasSpecialChars = true;
+        break;
+      }
+    }
+
+    if (!hasSpecialChars) {
+      this.nome = naturalidade;
+    }
+
+  }
+
+  public Genero getGenero() {
+    return genero;
+  }
+
+  public void setGenero(Genero genero) {
+    this.genero = genero;
   }
 
   public EstadoCivil getEstadoCivil() {
@@ -102,112 +145,61 @@ public class Pessoa {
   }
 
   public void setEstadoCivil(EstadoCivil estadoCivil) {
-    if (!EnumSet.allOf(EstadoCivil.class).contains(estadoCivil) || estadoCivil == null) {
-      throw new IllegalArgumentException("Estado civil não pode ser nulo");
-    }
-
     this.estadoCivil = estadoCivil;
+
   }
 
-  public FormacaoAcademica getFormacaoAcademica() {
-    return formacaoAcademica;
+  public Escolaridade getEscolaridade() {
+    return escolaridade;
   }
 
-  public void setFormacaoAcademica(FormacaoAcademica formacaoAcademica) {
-    if (!EnumSet.allOf(FormacaoAcademica.class).contains(formacaoAcademica)
-        || formacaoAcademica == null) {
-      throw new IllegalArgumentException("Formação acadêmica não pode ser nula");
-    }
+  public void setEscolaridade(Escolaridade escolaridade) {
+    this.escolaridade = escolaridade;
 
-    this.formacaoAcademica = formacaoAcademica;
   }
 
-  public Profissao getProfissao() {
-    return profissao;
+  public Moradia getMoradia() {
+    return moradia;
   }
 
-  public void setProfissao(Profissao profissao) {
-    if (!EnumSet.allOf(Profissao.class).contains(profissao) || profissao == null) {
-      throw new IllegalArgumentException("Profissão não pode ser nula");
-    }
+  public void setMoradia(Moradia moradia) {
+    this.moradia = moradia;
 
-    this.profissao = profissao;
   }
 
-  public boolean hasVidaSocial() {
-    return vidaSocial;
-  }
-
-  public void setVidaSocial(boolean vidaSocial) {
-    this.vidaSocial = vidaSocial;
-  }
-
-  public boolean hasHobby() {
+  public Hobby getHobby() {
     return hobby;
   }
 
-  public void setHobby(boolean hobby) {
+  public void setHobby(Hobby hobby) {
     this.hobby = hobby;
   }
 
-  public int getAtividadeFisica() {
-    return atividadeFisica;
+  public boolean isFeliz() {
+    return feliz;
   }
 
-  public void setAtividadeFisica(int atividadeFisica) {
-    if (atividadeFisica < 0 || atividadeFisica > 7) {
-      throw new IllegalArgumentException(
-          "Atividade física deve ser maior que 0 e menor que 7 dias");
-    }
-
-    this.atividadeFisica = atividadeFisica;
+  public void setFeliz(boolean feliz) {
+    this.feliz = feliz;
   }
 
-  public int getSaude() {
-    return saude;
-  }
-
-  public void setSaude(int saude) {
-    if (saude < 1 || saude > 10) {
-      throw new IllegalArgumentException("Saude deve ser maior que 1 e menor que 10");
-    }
-
-    this.saude = saude;
-  }
-
+  @Override
   public String toString() {
-    return ("Nome: "
-        + nome
-        + "\n"
-        + "Altura: "
-        + altura
-        + "\n"
-        + "Peso: "
-        + peso
-        + "\n"
-        + "Data de nascimento: "
-        + dataNascimento
-        + "\n"
-        + "Estado civil: "
-        + estadoCivil
-        + "\n"
-        + "Formação acadêmica: "
-        + formacaoAcademica
-        + "\n"
-        + "Profissão: "
-        + profissao
-        + "\n"
-        + "Vida social: "
-        + vidaSocial
-        + "\n"
-        + "Hobby: "
-        + hobby
-        + "\n"
-        + "Atividade física: "
-        + atividadeFisica
-        + "\n"
-        + "Saude: "
-        + saude
-        + "\n");
+    return "Informações da Pessoa:\n" +
+          "======================\n" +
+          "Nome:           " + nome + "\n" +
+          "Altura:         " + String.format("%.2f", altura) + " metros\n" +
+          "Peso:           " + peso + " kg\n" +
+          "Renda:          " + String.format("R$ %.2f", renda) + "\n" +
+          "Data de Nasc.:  " + dataNascimento + "\n" +
+          "Naturalidade:   " + naturalidade + "\n" +
+          "Gênero:         " + genero + "\n" +
+          "Estado Civil:   " + estadoCivil + "\n" +
+          "Escolaridade:   " + escolaridade + "\n" +
+          "Moradia:        " + moradia + "\n" +
+          "Hobby:          " + hobby + "\n" +
+          "Está feliz?     " + (feliz ? "Sim" : "Não") + "\n" +
+          "======================";
   }
+
 }
