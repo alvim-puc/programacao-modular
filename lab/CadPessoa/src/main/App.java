@@ -2,9 +2,7 @@ package main;
 
 import business.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.function.Consumer;
 
 public class App {
   public static final int MAX_PEOPLE = 55;
@@ -16,7 +14,8 @@ public class App {
 
     System.out.println("---------------- MENU -----------------");
     System.out.println("1. Cadastrar uma pessoa");
-    System.out.println("2. Listar pessoas");
+    System.out.println("2. Listar pessoas cadastradas");
+    System.out.println("3. Deletar pessoas cadastradas");
     System.out.println("0. Sair");
     System.out.print("Opção: ");
     choice = reader.nextInt();
@@ -26,6 +25,11 @@ public class App {
   }
 
   public static void registerPerson(Scanner reader) {
+    if (lengthPeople >= MAX_PEOPLE) {
+      System.err.println("Máximo de pessoas cadastradas.");
+      return;
+    }
+
     try {
       int choiceEnums;
 
@@ -36,13 +40,36 @@ public class App {
       float altura = reader.nextFloat();
 
       System.out.print("Insira seu peso: ");
-      float peso = reader.nextFloat();
+      int peso = reader.nextInt();
+
+      System.out.print("Insira sua renda: ");
+      float renda = reader.nextFloat();
 
       reader.nextLine();
 
       System.out.print("Insira sua data de nascimento no formato AAAA-MM-DD: ");
       String dataNascimento = reader.nextLine();
       LocalDate data = LocalDate.parse(dataNascimento);
+
+      System.out.print("Qual sua naturalidade: ");
+      String naturalidade = reader.nextLine();
+
+      System.out.println("Qual o seu gênero? ");
+      System.out.println("1. Feminino");
+      System.out.println("2. Masculino");
+      System.out.println("3. Não-binário");
+      System.out.println("4. Não responder");
+      System.out.print("Opção: ");
+      choiceEnums = reader.nextInt();
+      Genero genero =
+          Genero.valueOf(
+              switch (choiceEnums) {
+                case 1 -> Genero.FEMININO.toString();
+                case 2 -> Genero.MASCULINO.toString();
+                case 3 -> Genero.NAO_BINARIO.toString();
+                case 4 -> Genero.NAO_RESPONDER.toString();
+                default -> Genero.NAO_RESPONDER.toString();
+              });
 
       System.out.println("Qual o seu estado civil? ");
       System.out.println("1. Solteiro");
@@ -65,73 +92,78 @@ public class App {
                 default -> EstadoCivil.SOLTEIRO.toString();
               });
 
-      System.out.println("Qual a sua formação acadêmica? ");
+      System.out.println("Qual a sua escolaridade? ");
       System.out.println("1. Nenhuma");
-      System.out.println("2. Básica");
-      System.out.println("3. Média");
+      System.out.println("2. Fundamental");
+      System.out.println("3. Médio");
       System.out.println("4. Superior");
+      System.out.println("5. Pós-graduação");
       System.out.print("Opção: ");
       choiceEnums = reader.nextInt();
-      FormacaoAcademica formacaoAcademica =
-          FormacaoAcademica.valueOf(
+      Escolaridade escolaridade =
+          Escolaridade.valueOf(
               switch (choiceEnums) {
-                case 1 -> FormacaoAcademica.NENHUMA.toString();
-                case 2 -> FormacaoAcademica.BASICA.toString();
-                case 3 -> FormacaoAcademica.MEDIA.toString();
-                case 4 -> FormacaoAcademica.SUPERIOR.toString();
-                default -> FormacaoAcademica.NENHUMA.toString();
+                case 1 -> Escolaridade.NENHUMA.toString();
+                case 2 -> Escolaridade.FUNDAMENTAL.toString();
+                case 3 -> Escolaridade.MEDIO.toString();
+                case 4 -> Escolaridade.SUPERIOR.toString();
+                case 5 -> Escolaridade.POS_GRADUACAO.toString();
+                default -> Escolaridade.NENHUMA.toString();
               });
 
-      System.out.println("Qual a sua profissão? ");
-      System.out.println("1. Desempregado");
-      System.out.println("2. Estudante");
-      System.out.println("3. Autônomo");
-      System.out.println("4. CLT");
-      System.out.println("5. Empresário");
+      System.out.println("Em qual tipo de moradia você reside? ");
+      System.out.println("1. Com a família");
+      System.out.println("2. Aluguel");
+      System.out.println("3. Casa própria");
       System.out.print("Opção: ");
       choiceEnums = reader.nextInt();
-      Profissao profissao =
-          Profissao.valueOf(
+      Moradia moradia =
+          Moradia.valueOf(
               switch (choiceEnums) {
-                case 1 -> Profissao.DESEMPREGADO.toString();
-                case 2 -> Profissao.ESTUDANTE.toString();
-                case 3 -> Profissao.AUTONOMO.toString();
-                case 4 -> Profissao.CLT.toString();
-                case 5 -> Profissao.EMPRESARIO.toString();
-                default -> Profissao.DESEMPREGADO.toString();
+                case 1 -> Moradia.COM_FAMILIA.toString();
+                case 2 -> Moradia.ALUGUEL.toString();
+                case 3 -> Moradia.CASA_PROPRIA.toString();
+                default -> Moradia.COM_FAMILIA.toString();
+              });
+        
+      System.out.println("Qual o seu hobby? ");
+      System.out.println("1. Arte");
+      System.out.println("2. Esporte");
+      System.out.println("3. Cinema");
+      System.out.println("4. Livro");
+      System.out.println("5. Música");
+      System.out.println("6. Culinária");
+      System.out.println("7. Game");
+      System.out.println("8. Nenhum");
+      System.out.print("Opção: ");
+      choiceEnums = reader.nextInt();
+      Hobby hobby =
+          Hobby.valueOf(
+              switch (choiceEnums) {
+                case 1 -> Hobby.ARTE.toString();
+                case 2 -> Hobby.ESPORTE.toString();
+                case 3 -> Hobby.CINEMA.toString();
+                case 4 -> Hobby.LIVRO.toString();
+                case 5 -> Hobby.MUSICA.toString();
+                case 6 -> Hobby.CULINARIA.toString();
+                case 7 -> Hobby.GAME.toString();
+                case 8 -> Hobby.NENHUM.toString();
+                default -> Hobby.NENHUM.toString();
               });
 
-      System.out.println("Você tem vida social? 'true' ou 'false'");
-      boolean vidaSocial = reader.nextBoolean();
-
-      System.out.println("Você tem algum hobby? 'true' ou 'false'");
-      boolean hobby = reader.nextBoolean();
-
-      System.out.println("Quantos dias você faz atividade física por semana? 0 a 7");
-      int atividadeFisica = reader.nextInt();
-
-      System.out.println("Qual a sua saúde? 1 a 10");
-      int saude = reader.nextInt();
+      System.out.println("Você é feliz? 'true' ou 'false'");
+      boolean feliz = reader.nextBoolean();
 
       Pessoa pessoa =
-          new Pessoa(
-              nome,
-              altura,
-              peso,
-              data,
-              estadoCivil,
-              formacaoAcademica,
-              profissao,
-              vidaSocial,
-              hobby,
-              atividadeFisica,
-              saude);
+          new Pessoa(nome, altura, peso, renda, data, naturalidade, genero, estadoCivil, escolaridade,
+              moradia, hobby, feliz);
 
-      pessoas.add(pessoa);
+      pessoas[lengthPeople] = pessoa;
+      lengthPeople++;
 
       System.out.println("Pessoa cadastrada com sucesso!");
     } catch (IllegalArgumentException e) {
-      System.err.println("Erro ao cadastrar usuário: : " + e.getMessage());
+      System.err.println("Erro ao cadastrar usuário: " + e.getMessage());
     }
   }
 
@@ -144,6 +176,12 @@ public class App {
     for (int i = 0; i < lengthPeople; i++) {
       System.out.println(pessoas[i]);
     }
+  }
+
+  public static void deletePeople() {
+    pessoas = new Pessoa[MAX_PEOPLE];
+    lengthPeople = 0;
+    System.out.println("Pessoas deletadas com sucesso.");
   }
 
   public static void main(String[] args) throws Exception {
@@ -165,6 +203,10 @@ public class App {
 
         case 2:
           listPeople();
+          break;
+        
+        case 3:
+          deletePeople();
           break;
 
         default:

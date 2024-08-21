@@ -5,8 +5,8 @@ public enum Hobby {
   ESPORTE,
   CINEMA,
   LIVRO,
-  MÚSICA,
-  CULINÁRIA,
+  MUSICA,
+  CULINARIA,
   GAME,
   NENHUM
 }

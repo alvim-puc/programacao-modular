@@ -127,7 +127,7 @@ public class Pessoa {
     }
 
     if (!hasSpecialChars) {
-      this.nome = naturalidade;
+      this.naturalidade = naturalidade;
     }
 
   }
