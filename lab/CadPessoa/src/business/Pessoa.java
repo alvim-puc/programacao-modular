@@ -134,7 +134,7 @@ public class Pessoa {
     this.profissao = profissao;
   }
 
-  public boolean isVidaSocial() {
+  public boolean hasVidaSocial() {
     return vidaSocial;
   }
 
@@ -142,7 +142,7 @@ public class Pessoa {
     this.vidaSocial = vidaSocial;
   }
 
-  public boolean isHobby() {
+  public boolean hasHobby() {
     return hobby;
   }
 
