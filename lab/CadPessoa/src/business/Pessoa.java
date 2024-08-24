@@ -26,7 +26,7 @@ public class Pessoa {
       LocalDate dataNascimento,
       String naturalidade,
       Genero genero,
-      EstadoCivil estadoCivil,  
+      EstadoCivil estadoCivil,
       Escolaridade escolaridade,
       Moradia moradia,
       Hobby hobby,
@@ -52,19 +52,14 @@ public class Pessoa {
 
   public void setNome(String nome) {
     char[] cName = nome.toCharArray();
-    boolean hasSpecialChars = false;
 
     for (char c : cName) {
       if (!Character.isLetter(c) && !Character.isWhitespace(c)) {
-        hasSpecialChars = true;
-        break;
+        return;
       }
     }
 
-    if (!hasSpecialChars) {
-      this.nome = nome;
-    }
-
+    this.nome = nome;
   }
 
   public float getAltura() {
@@ -75,7 +70,6 @@ public class Pessoa {
     if (altura > 0 && altura < 2.6f) {
       this.altura = altura;
     }
-
   }
 
   public int getPeso() {
@@ -86,18 +80,16 @@ public class Pessoa {
     if (peso > 0 && peso < 600) {
       this.peso = peso;
     }
-
   }
 
   public float getRenda() {
-    return renda;  
+    return renda;
   }
 
   public void setRenda(float renda) {
     if (renda > 0) {
       this.renda = renda;
     }
-
   }
 
   public LocalDate getDataNascimento() {
@@ -108,7 +100,6 @@ public class Pessoa {
     if (LocalDate.now().isAfter(dataNascimento)) {
       this.dataNascimento = dataNascimento;
     }
-
   }
 
   public String getNaturalidade() {
@@ -117,19 +108,14 @@ public class Pessoa {
 
   public void setNaturalidade(String naturalidade) {
     char[] cNaturalidade = naturalidade.toCharArray();
-    boolean hasSpecialChars = false;
 
     for (char c : cNaturalidade) {
       if (!Character.isLetter(c) && !Character.isWhitespace(c)) {
-        hasSpecialChars = true;
-        break;
+        return;
       }
     }
 
-    if (!hasSpecialChars) {
-      this.naturalidade = naturalidade;
-    }
-
+    this.naturalidade = naturalidade;
   }
 
   public Genero getGenero() {
@@ -146,7 +132,6 @@ public class Pessoa {
 
   public void setEstadoCivil(EstadoCivil estadoCivil) {
     this.estadoCivil = estadoCivil;
-
   }
 
   public Escolaridade getEscolaridade() {
@@ -155,7 +140,6 @@ public class Pessoa {
 
   public void setEscolaridade(Escolaridade escolaridade) {
     this.escolaridade = escolaridade;
-
   }
 
   public Moradia getMoradia() {
@@ -164,7 +148,6 @@ public class Pessoa {
 
   public void setMoradia(Moradia moradia) {
     this.moradia = moradia;
-
   }
 
   public Hobby getHobby() {
@@ -201,5 +184,4 @@ public class Pessoa {
           "Está feliz?     " + (feliz ? "Sim" : "Não") + "\n" +
           "======================";
   }
-
 }
