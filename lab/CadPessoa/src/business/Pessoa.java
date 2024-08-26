@@ -171,7 +171,7 @@ public class Pessoa {
     return "Informações da Pessoa:\n"
         + "======================\n"
         + "Nome:           "
-        + nome == null ? "Não informado" : nome
+        + (nome == null ? "Não informado" : nome)
         + "\n"
         + "Altura:         "
         + String.format("%.2f", altura)
@@ -186,7 +186,7 @@ public class Pessoa {
         + dataNascimento
         + "\n"
         + "Naturalidade:   "
-        + naturalidade == null ? "Não informado" : naturalidade
+        + (naturalidade == null ? "Não informado" : naturalidade)
         + "\n"
         + "Gênero:         "
         + genero
