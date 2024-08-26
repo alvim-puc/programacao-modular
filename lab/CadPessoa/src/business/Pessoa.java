@@ -51,15 +51,9 @@ public class Pessoa {
   }
 
   public void setNome(String nome) {
-    char[] cName = nome.toCharArray();
-
-    for (char c : cName) {
-      if (!Character.isLetter(c) && !Character.isWhitespace(c)) {
-        return;
-      }
+    if (validateString(nome)) {
+      this.nome = nome;
     }
-
-    this.nome = nome;
   }
 
   public float getAltura() {
@@ -107,15 +101,9 @@ public class Pessoa {
   }
 
   public void setNaturalidade(String naturalidade) {
-    char[] cNaturalidade = naturalidade.toCharArray();
-
-    for (char c : cNaturalidade) {
-      if (!Character.isLetter(c) && !Character.isWhitespace(c)) {
-        return;
-      }
+    if (validateString(naturalidade)) {
+      this.naturalidade = naturalidade;
     }
-
-    this.naturalidade = naturalidade;
   }
 
   public Genero getGenero() {
@@ -166,22 +154,58 @@ public class Pessoa {
     this.feliz = feliz;
   }
 
+  public boolean validateString(String str) {
+    char[] chars = str.toCharArray();
+
+    for (char c : chars) {
+      if (!Character.isLetter(c) && !Character.isWhitespace(c)) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
   @Override
   public String toString() {
-    return "Informações da Pessoa:\n" +
-          "======================\n" +
-          "Nome:           " + nome + "\n" +
-          "Altura:         " + String.format("%.2f", altura) + " metros\n" +
-          "Peso:           " + peso + " kg\n" +
-          "Renda:          " + String.format("R$ %.2f", renda) + "\n" +
-          "Data de Nasc.:  " + dataNascimento + "\n" +
-          "Naturalidade:   " + naturalidade + "\n" +
-          "Gênero:         " + genero + "\n" +
-          "Estado Civil:   " + estadoCivil + "\n" +
-          "Escolaridade:   " + escolaridade + "\n" +
-          "Moradia:        " + moradia + "\n" +
-          "Hobby:          " + hobby + "\n" +
-          "Está feliz?     " + (feliz ? "Sim" : "Não") + "\n" +
-          "======================";
+    return "Informações da Pessoa:\n"
+        + "======================\n"
+        + "Nome:           "
+        + nome == null ? "Não informado" : nome
+        + "\n"
+        + "Altura:         "
+        + String.format("%.2f", altura)
+        + " metros\n"
+        + "Peso:           "
+        + peso
+        + " kg\n"
+        + "Renda:          "
+        + String.format("R$ %.2f", renda)
+        + "\n"
+        + "Data de Nasc.:  "
+        + dataNascimento
+        + "\n"
+        + "Naturalidade:   "
+        + naturalidade == null ? "Não informado" : naturalidade
+        + "\n"
+        + "Gênero:         "
+        + genero
+        + "\n"
+        + "Estado Civil:   "
+        + estadoCivil
+        + "\n"
+        + "Escolaridade:   "
+        + escolaridade
+        + "\n"
+        + "Moradia:        "
+        + moradia
+        + "\n"
+        + "Hobby:          "
+        + hobby
+        + "\n"
+        + "Está feliz?     "
+        + (feliz ? "Sim" : "Não")
+        + "\n"
+        + "======================";
   }
 }
