@@ -81,7 +81,7 @@ public class Pessoa {
   }
 
   public void setRenda(float renda) {
-    if (renda > 0) {
+    if (renda >= 0) {
       this.renda = renda;
     }
   }

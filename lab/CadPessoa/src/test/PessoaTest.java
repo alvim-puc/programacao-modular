@@ -64,7 +64,7 @@ public class PessoaTest {
     pessoa.setPeso(0);
     assertEquals(70, pessoa.getPeso(), "Testa peso abaixo do limite");
 
-    pessoa.setPeso(601);
+    pessoa.setPeso(600);
     assertEquals(70, pessoa.getPeso(), "Testa peso acima do limite");
   }
 
@@ -73,7 +73,7 @@ public class PessoaTest {
     pessoa.setRenda(1000);
     assertEquals(1000, pessoa.getRenda(), "Testa renda válida");
 
-    pessoa.setRenda(0);
+    pessoa.setRenda(-1);
     assertEquals(1000, pessoa.getRenda(), "Testa renda inválida");
   }
 }
