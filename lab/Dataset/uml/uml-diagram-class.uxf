@@ -1,0 +1,46 @@
+<diagram program="umletino" version="15.1"><zoom_level>6</zoom_level><element><id>UMLClass</id><coordinates><x>228</x><y>240</y><w>162</w><h>144</h></coordinates><panel_attributes>&lt;&lt;class&gt;&gt;
+br.lpm.business::Pessoa
+--
+-nome: String
+-altura: float
+-renda: float
+-dataNascimento: LocalDate
+-naturalidade: String
+-genero: Genero
+-estadoCivil: EstadoCivil
+-escolaridade: Escolaridade
+-moradia: Moradia
+-hobby: Hobby
+-feliz: boolean
+--
++toString()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>90</x><y>156</y><w>126</w><h>78</h></coordinates><panel_attributes>&lt;&lt;enum&gt;&gt;
+br.lpm.business::Genero
+--
++FEMININO
++MASCULINO
++NAO_BINARIO
++NAO_RESPONDER</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>402</x><y>156</y><w>126</w><h>78</h></coordinates><panel_attributes>&lt;&lt;enum&gt;&gt;
+br.lpm.business::EstadoCivil
+--
++SOLTEIRO
++CASADO
++UNIAO_ESTAVEL
++DIVORCIADO
++SEPARADO
++VIUVO</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>84</x><y>390</y><w>126</w><h>78</h></coordinates><panel_attributes>&lt;&lt;enum&gt;&gt;
+br.lpm.business::Escolaridade
+--
++NENHUNA
++FUNDAMENTAL
++MEDIO
++SUPERIOR
++POS_GRADUACAO</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>402</x><y>396</y><w>126</w><h>78</h></coordinates><panel_attributes>&lt;&lt;enum&gt;&gt;
+br.lpm.business::Moradia
+--
++ALUGUEL
++CASA_PROPRIA
++COM_FAMILIA</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>648</x><y>156</y><w>162</w><h>144</h></coordinates><panel_attributes>&lt;&lt;class&gt;&gt;
+br.lpm.business::Dataset
+--
+
+--</panel_attributes><additional_attributes></additional_attributes></element></diagram>
