@@ -154,7 +154,7 @@ public class Pessoa {
     this.feliz = feliz;
   }
 
-  public boolean validateString(String str) {
+  private boolean validateString(String str) {
     char[] chars = str.toCharArray();
 
     for (char c : chars) {
