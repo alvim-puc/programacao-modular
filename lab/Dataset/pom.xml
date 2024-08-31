@@ -18,6 +18,11 @@ http://maven.apache.org/xsd/maven-4.0.0.xsd">
 <version>5.9.1</version>
 <scope>test</scope>
 </dependency>
+<dependency>
+<groupId>org.jfree</groupId>
+<artifactId>jfreechart</artifactId>
+<version>1.5.3</version>
+</dependency>
 </dependencies>
 <build>
 <pluginManagement>

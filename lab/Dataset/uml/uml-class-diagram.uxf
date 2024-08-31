@@ -1,4 +1,4 @@
-<diagram program="umletino" version="15.1"><zoom_level>7</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>294</x><y>0</y><w>189</w><h>168</h></coordinates><panel_attributes>&lt;&lt;class&gt;&gt;
+<diagram program="umletino" version="15.1"><zoom_level>7</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>301</x><y>35</y><w>189</w><h>168</h></coordinates><panel_attributes>&lt;&lt;class&gt;&gt;
 br.lpm.business::Pessoa
 --
 -nome: String
@@ -13,13 +13,13 @@ br.lpm.business::Pessoa
 -hobby: Hobby
 -feliz: boolean
 --
-+toString()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>49</x><y>210</y><w>147</w><h>91</h></coordinates><panel_attributes>&lt;&lt;enum&gt;&gt;
++toString()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>56</x><y>245</y><w>147</w><h>91</h></coordinates><panel_attributes>&lt;&lt;enum&gt;&gt;
 br.lpm.business::Genero
 --
 +FEMININO
 +MASCULINO
 +NAO_BINARIO
-+NAO_RESPONDER</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>217</x><y>210</y><w>147</w><h>91</h></coordinates><panel_attributes>&lt;&lt;enum&gt;&gt;
++NAO_RESPONDER</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>224</x><y>245</y><w>147</w><h>91</h></coordinates><panel_attributes>&lt;&lt;enum&gt;&gt;
 br.lpm.business::EstadoCivil
 --
 +SOLTEIRO
@@ -27,19 +27,19 @@ br.lpm.business::EstadoCivil
 +UNIAO_ESTAVEL
 +DIVORCIADO
 +SEPARADO
-+VIUVO</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>392</x><y>210</y><w>147</w><h>91</h></coordinates><panel_attributes>&lt;&lt;enum&gt;&gt;
++VIUVO</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>399</x><y>245</y><w>147</w><h>91</h></coordinates><panel_attributes>&lt;&lt;enum&gt;&gt;
 br.lpm.business::Escolaridade
 --
 +NENHUNA
 +FUNDAMENTAL
 +MEDIO
 +SUPERIOR
-+POS_GRADUACAO</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>560</x><y>210</y><w>147</w><h>91</h></coordinates><panel_attributes>&lt;&lt;enum&gt;&gt;
++POS_GRADUACAO</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>567</x><y>245</y><w>147</w><h>91</h></coordinates><panel_attributes>&lt;&lt;enum&gt;&gt;
 br.lpm.business::Moradia
 --
 +ALUGUEL
 +CASA_PROPRIA
-+COM_FAMILIA</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>245</x><y>343</y><w>266</w><h>392</h></coordinates><panel_attributes>&lt;&lt;class&gt;&gt;
++COM_FAMILIA</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>252</x><y>378</y><w>266</w><h>392</h></coordinates><panel_attributes>&lt;&lt;class&gt;&gt;
 br.lpm.business::Dataset
 --
 -MAX_PESSOAS = 55 &lt;&lt;static&gt;&gt;
@@ -76,5 +76,5 @@ br.lpm.business::Dataset
 +modeEscolaridade() : Escolaridade
 +modeGenero() : Genero
 +modeMoradia() : Moradia
-+modeHobby() : Hobby</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>105</x><y>294</y><w>168</w><h>63</h></coordinates><panel_attributes></panel_attributes><additional_attributes>10;10;220;70</additional_attributes></element><element><id>Relation</id><coordinates><x>287</x><y>294</y><w>49</w><h>63</h></coordinates><panel_attributes></panel_attributes><additional_attributes>10;10;50;70</additional_attributes></element><element><id>Relation</id><coordinates><x>427</x><y>294</y><w>49</w><h>63</h></coordinates><panel_attributes></panel_attributes><additional_attributes>50;10;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>483</x><y>294</y><w>161</w><h>63</h></coordinates><panel_attributes></panel_attributes><additional_attributes>210;10;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>434</x><y>161</y><w>49</w><h>63</h></coordinates><panel_attributes></panel_attributes><additional_attributes>10;10;50;70</additional_attributes></element><element><id>Relation</id><coordinates><x>308</x><y>161</y><w>49</w><h>63</h></coordinates><panel_attributes></panel_attributes><additional_attributes>50;10;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>105</x><y>161</y><w>217</w><h>63</h></coordinates><panel_attributes></panel_attributes><additional_attributes>290;10;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>462</x><y>161</y><w>189</w><h>63</h></coordinates><panel_attributes></panel_attributes><additional_attributes>10;10;250;70</additional_attributes></element><element><id>Relation</id><coordinates><x>371</x><y>161</y><w>35</w><h>196</h></coordinates><panel_attributes>lt=&lt;-
++modeHobby() : Hobby</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>112</x><y>329</y><w>168</w><h>63</h></coordinates><panel_attributes></panel_attributes><additional_attributes>10;10;220;70</additional_attributes></element><element><id>Relation</id><coordinates><x>294</x><y>329</y><w>49</w><h>63</h></coordinates><panel_attributes></panel_attributes><additional_attributes>10;10;50;70</additional_attributes></element><element><id>Relation</id><coordinates><x>434</x><y>329</y><w>49</w><h>63</h></coordinates><panel_attributes></panel_attributes><additional_attributes>50;10;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>490</x><y>329</y><w>161</w><h>63</h></coordinates><panel_attributes></panel_attributes><additional_attributes>210;10;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>441</x><y>196</y><w>49</w><h>63</h></coordinates><panel_attributes></panel_attributes><additional_attributes>10;10;50;70</additional_attributes></element><element><id>Relation</id><coordinates><x>315</x><y>196</y><w>49</w><h>63</h></coordinates><panel_attributes></panel_attributes><additional_attributes>50;10;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>112</x><y>196</y><w>217</w><h>63</h></coordinates><panel_attributes></panel_attributes><additional_attributes>290;10;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>469</x><y>196</y><w>189</w><h>63</h></coordinates><panel_attributes></panel_attributes><additional_attributes>10;10;250;70</additional_attributes></element><element><id>Relation</id><coordinates><x>378</x><y>196</y><w>35</w><h>196</h></coordinates><panel_attributes>lt=&lt;-
 m1=0..n</panel_attributes><additional_attributes>10;10;10;260</additional_attributes></element></diagram>
