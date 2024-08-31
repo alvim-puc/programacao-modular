@@ -10,20 +10,24 @@ public class Dataset {
   }
 
   public void addPessoa(Pessoa p) {
+    if (qtdPessoas >= MAX_PESSOAS || p == null || getPessoaByName(p.getNome()) != null) {
+      return;
+    }
+
     pessoas[qtdPessoas] = p;
     qtdPessoas++;
   }
 
   private void reorganiza(int posicaoVazia) {
-    for (int i = posicaoVazia; i < qtdPessoas; i++) {
+    for (int i = posicaoVazia; i < qtdPessoas - 1; i++) {
       pessoas[i] = pessoas[i + 1];
     }
-    qtdPessoas--;
+    pessoas[--qtdPessoas] = null;
   }
 
   public void removePessoa(Pessoa p) {
     for (int i = 0; i < qtdPessoas; i++) {
-      if (pessoas[i] != null && p.equals(pessoas[i])) {
+      if (p != null && pessoas[i] != null && p.equals(pessoas[i])) {
         reorganiza(i);
         return;
       }
@@ -35,6 +39,10 @@ public class Dataset {
   }
 
   public void replacePessoa(Pessoa velha, Pessoa nova) {
+    if (velha == null || nova == null) {
+      return;
+    }
+
     for (int i = 0; i < qtdPessoas; i++) {
       if (pessoas[i] != null && velha.equals(pessoas[i])) {
         pessoas[i] = nova;

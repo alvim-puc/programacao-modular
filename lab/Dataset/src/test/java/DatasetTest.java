@@ -36,7 +36,6 @@ public class DatasetTest {
           Moradia.CASA_PROPRIA,
           Hobby.LIVRO,
           true);
-
   private static final Pessoa pessoa3 =
       new Pessoa(
           "gilberto",
@@ -61,6 +60,14 @@ public class DatasetTest {
   void testAddPessoas() {
     dataset.addPessoa(pessoa1);
     assertEquals(1, dataset.size());
+
+    dataset.addPessoa(null);
+    assertEquals(1, dataset.size());
+
+    dataset.addPessoa(pessoa1);
+
+    dataset.addPessoa(pessoa2);
+    assertEquals(2, dataset.size());
 
     dataset.addPessoa(pessoa2);
     assertEquals(2, dataset.size());
@@ -253,6 +260,7 @@ public class DatasetTest {
     dataset.addPessoa(pessoa3);
     dataset.removeAll();
     assertEquals(0, dataset.size());
+    assertNotEquals(pessoa2.getNome(), dataset.getPessoaByName(pessoa2.getNome()));
   }
 
   @Test
@@ -262,6 +270,9 @@ public class DatasetTest {
 
     dataset.removePessoa(pessoa1);
     assertEquals(1, dataset.size());
+
+    dataset.removePessoa(pessoa3);
+    assertEquals(1, dataset.size());
   }
 
   @Test
@@ -270,6 +281,9 @@ public class DatasetTest {
     dataset.addPessoa(pessoa3);
 
     dataset.removePessoaByName(pessoa2.getNome());
+    assertEquals(1, dataset.size());
+
+    dataset.removePessoaByName(pessoa1.getNome());
     assertEquals(1, dataset.size());
   }
 
@@ -287,6 +301,8 @@ public class DatasetTest {
     dataset.addPessoa(pessoa2);
     assertEquals(2, dataset.size());
     dataset.addPessoa(pessoa3);
+    assertEquals(3, dataset.size());
+    dataset.addPessoa(pessoa1);
     assertEquals(3, dataset.size());
   }
 }

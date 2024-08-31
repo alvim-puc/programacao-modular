@@ -1,12 +1,6 @@
 package br.lpm.main;
 
-import br.lpm.business.Dataset;
-import br.lpm.business.Escolaridade;
-import br.lpm.business.EstadoCivil;
-import br.lpm.business.Genero;
-import br.lpm.business.Hobby;
-import br.lpm.business.Moradia;
-import br.lpm.business.Pessoa;
+import br.lpm.business.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.time.LocalDate;
@@ -208,13 +202,21 @@ public class Main {
         case "Busca" -> realizarBusca();
         case "Exclusão" -> realizarExclusao();
         case "Relatórios" -> gerarRelatorios();
-        case "Sair" -> frame.dispose();
+        case "Sair" -> {
+          frame.dispose();
+          return;
+        }
         default -> System.out.println("Opção inválida.");
       }
     }
   }
 
   private static void realizarCadastro() {
+    if(dataset.size() == dataset.getMaxPessoas()) {
+      System.err.println("Máximo de pessoas cadastradas");
+      return;
+    }
+
     String nome = collectString("Nome:");
 
     String naturalidade = collectString("Naturalidade:");
@@ -266,9 +268,7 @@ public class Main {
 
     frame.removeAll();
     if (pessoa == null) {
-      Label notFoundLabel = new Label("Pessoa não encontrada.");
-      notFoundLabel.setBounds(50, 50, 200, 30);
-      frame.add(notFoundLabel);
+      printGenericMessate(nomeBusca + " não encontrado.");
     } else {
       Label nomeLabel = new Label("Nome:");
       nomeLabel.setBounds(20, 30, 200, 20);
@@ -333,23 +333,13 @@ public class Main {
       frame.add(escolaridadeValueLabel);
       frame.add(moradiaLabel);
       frame.add(moradiaValueLabel);
+
+      frame.setSize(400, 600);
+      frame.setLayout(null);
+      frame.setVisible(true);
     }
 
-    Button okButton = new Button("OK");
-    okButton.setBounds(100, 500, 80, 30);
-    okButton.addActionListener(
-        new ActionListener() {
-          public void actionPerformed(ActionEvent e) {
-            synchronized (frame) {
-              frame.notify();
-            }
-          }
-        });
-    frame.add(okButton);
-
-    frame.setSize(400, 600);
-    frame.setLayout(null);
-    frame.setVisible(true);
+    addButtonOK("OK");
 
     synchronized (frame) {
       try {
@@ -366,26 +356,8 @@ public class Main {
     String nomeExclusao = collectString("Nome a ser excluído: ");
     dataset.removePessoaByName(nomeExclusao);
 
-    frame.removeAll();
-    Label excludedLabel = new Label("Pessoa excluída.");
-    excludedLabel.setBounds(50, 50, 200, 30);
-    frame.add(excludedLabel);
-
-    Button okButton = new Button("OK");
-    okButton.setBounds(100, 500, 80, 30);
-    okButton.addActionListener(
-        new ActionListener() {
-          public void actionPerformed(ActionEvent e) {
-            synchronized (frame) {
-              frame.notify();
-            }
-          }
-        });
-    frame.add(okButton);
-
-    frame.setSize(400, 600);
-    frame.setLayout(null);
-    frame.setVisible(true);
+    printGenericMessate("Pessoa excluída com sucesso.");
+    addButtonOK("OK");
 
     System.out.println("Exclusão realizada.");
   }
@@ -393,17 +365,8 @@ public class Main {
   public static void pieHobby() {
     DefaultPieDataset<String> pieDataset = new DefaultPieDataset<>();
 
-    int[] contagemHobby = new int[Hobby.values().length];
-
-    for (Pessoa pessoa : dataset.getAll()) {
-      if (pessoa != null) {
-        Hobby hobby = pessoa.getHobby();
-        contagemHobby[hobby.ordinal()]++;
-      }
-    }
-
     for (Hobby hobby : Hobby.values()) {
-      pieDataset.setValue(hobby.toString(), contagemHobby[hobby.ordinal()]);
+      pieDataset.setValue(hobby.toString(), (dataset.percentHobby(hobby) * dataset.size()));
     }
 
     JFreeChart pieChart =
@@ -422,18 +385,9 @@ public class Main {
   public static void histogramEscolaridade() {
     DefaultCategoryDataset datasetEscolaridade = new DefaultCategoryDataset();
 
-    int[] contagemEscolaridade = new int[Escolaridade.values().length];
-
-    for (Pessoa pessoa : dataset.getAll()) {
-      if (pessoa != null) {
-        Escolaridade escolaridade = pessoa.getEscolaridade();
-        contagemEscolaridade[escolaridade.ordinal()]++;
-      }
-    }
-
     for (Escolaridade escolaridade : Escolaridade.values()) {
       datasetEscolaridade.addValue(
-          contagemEscolaridade[escolaridade.ordinal()],
+          dataset.percentEscolaridade(escolaridade) * dataset.size(),
           "Número de Pessoas",
           escolaridade.toString());
     }
@@ -455,10 +409,35 @@ public class Main {
     frame.setVisible(true);
   }
 
-  private static void gerarRelatorios() {
+  public static void gerarRelatorios() {
     histogramEscolaridade();
     pieHobby();
     System.out.println("Relatório gerado.");
+  }
+
+  private static void printGenericMessate(String message) {
+    frame.removeAll();
+    Label excludedLabel = new Label(message);
+    excludedLabel.setBounds(50, 50, 200, 30);
+    frame.add(excludedLabel);
+
+    frame.setSize(400, 600);
+    frame.setLayout(null);
+    frame.setVisible(true);
+  }
+
+  public static void addButtonOK(String message) {
+    Button okButton = new Button(message);
+    okButton.setBounds(100, 500, 80, 30);
+    okButton.addActionListener(
+        new ActionListener() {
+          public void actionPerformed(ActionEvent e) {
+            synchronized (frame) {
+              frame.notify();
+            }
+          }
+        });
+    frame.add(okButton);
   }
 
   public static void main(String[] args) {
