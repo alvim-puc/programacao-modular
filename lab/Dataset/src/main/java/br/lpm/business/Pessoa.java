@@ -1,6 +1,7 @@
 package br.lpm.business;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 public class Pessoa {
   private String nome;
@@ -84,6 +85,10 @@ public class Pessoa {
     if (renda > 0) {
       this.renda = renda;
     }
+  }
+
+  public int getIdade() {
+    return Period.between(this.getDataNascimento(), LocalDate.now()).getYears();
   }
 
   public LocalDate getDataNascimento() {

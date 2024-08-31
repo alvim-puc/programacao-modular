@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import br.lpm.business.Pessoa;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class PessoaTest {
@@ -73,5 +74,12 @@ public class PessoaTest {
 
     pessoa.setRenda(0);
     assertEquals(1000, pessoa.getRenda(), "Testa renda inválida");
+  }
+
+  @Test
+  @DisplayName("Testa idade com base na data de nascimento")
+  void testGetIdade() {
+    pessoa.setDataNascimento(LocalDate.now().minusYears(18));
+    assertEquals(18, pessoa.getIdade(), "Testa idade válida");
   }
 }
