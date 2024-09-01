@@ -1,4 +1,4 @@
-<diagram program="umletino" version="15.1"><zoom_level>12</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>312</x><y>276</y><w>324</w><h>288</h></coordinates><panel_attributes>&lt;&lt;class&gt;&gt;
+<diagram program="umletino" version="15.1"><zoom_level>6</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>150</x><y>312</y><w>162</w><h>144</h></coordinates><panel_attributes>&lt;&lt;class&gt;&gt;
 br.lpm.business::Pessoa
 --
 -nome: String
@@ -13,13 +13,13 @@ br.lpm.business::Pessoa
 -hobby: Hobby
 -feliz: boolean
 --
-+toString()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>36</x><y>60</y><w>252</w><h>156</h></coordinates><panel_attributes>&lt;&lt;enum&gt;&gt;
++toString()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>18</x><y>210</y><w>126</w><h>78</h></coordinates><panel_attributes>&lt;&lt;enum&gt;&gt;
 br.lpm.business::Genero
 --
 +FEMININO
 +MASCULINO
 +NAO_BINARIO
-+NAO_RESPONDER</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>612</x><y>60</y><w>252</w><h>156</h></coordinates><panel_attributes>&lt;&lt;enum&gt;&gt;
++NAO_RESPONDER</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>306</x><y>210</y><w>126</w><h>78</h></coordinates><panel_attributes>&lt;&lt;enum&gt;&gt;
 br.lpm.business::EstadoCivil
 --
 +SOLTEIRO
@@ -27,19 +27,19 @@ br.lpm.business::EstadoCivil
 +UNIAO_ESTAVEL
 +DIVORCIADO
 +SEPARADO
-+VIUVO</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>564</y><w>252</w><h>156</h></coordinates><panel_attributes>&lt;&lt;enum&gt;&gt;
++VIUVO</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>462</y><w>126</w><h>78</h></coordinates><panel_attributes>&lt;&lt;enum&gt;&gt;
 br.lpm.business::Escolaridade
 --
 +NENHUNA
 +FUNDAMENTAL
 +MEDIO
 +SUPERIOR
-+POS_GRADUACAO</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>660</x><y>588</y><w>252</w><h>156</h></coordinates><panel_attributes>&lt;&lt;enum&gt;&gt;
++POS_GRADUACAO</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>330</x><y>474</y><w>126</w><h>78</h></coordinates><panel_attributes>&lt;&lt;enum&gt;&gt;
 br.lpm.business::Moradia
 --
 +ALUGUEL
 +CASA_PROPRIA
-+COM_FAMILIA</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1044</x><y>60</y><w>456</w><h>672</h></coordinates><panel_attributes>&lt;&lt;class&gt;&gt;
++COM_FAMILIA</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>522</x><y>204</y><w>228</w><h>354</h></coordinates><panel_attributes>&lt;&lt;class&gt;&gt;
 br.lpm.business::Dataset
 --
 _-MAX_PESSOAS = 55_
@@ -63,6 +63,7 @@ _-pessoas: Pessoas[MAX_PESSOAS]_
 +maxPeso() : float
 +minPeso() : float
 +avgPeso() : float
+-percentFloats(atributo: String) : float
 +percentAdult() : float
 +percentFeliz() : float
 -percentEnums(valor: Enum&lt;?&gt;) : float

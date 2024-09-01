@@ -123,26 +123,24 @@ public class Dataset {
     return pesoCalcs("AVG");
   }
 
-  public float percentAdult() {
+  private float percentFloats(String atributo) {
     float percent = 0;
     for (int i = 0; i < qtdPessoas; i++) {
-      if (pessoas[i].getIdade() >= 18) {
-        percent++;
+      switch (atributo) {
+        case "adultness" -> percent = pessoas[i].getIdade() >= 18 ? percent + 1 : percent;
+        case "happiness" -> percent = pessoas[i].isFeliz() ? percent + 1 : percent;
       }
     }
 
     return percent / qtdPessoas;
   }
 
-  public float percentFeliz() {
-    float percent = 0;
-    for (int i = 0; i < qtdPessoas; i++) {
-      if (pessoas[i].isFeliz()) {
-        percent++;
-      }
-    }
+  public float percentAdult() {
+    return percentFloats("adultness");
+  }
 
-    return percent / qtdPessoas;
+  public float percentFeliz() {
+    return percentFloats("happiness");
   }
 
   private float percentEnums(Enum<?> valor) {
