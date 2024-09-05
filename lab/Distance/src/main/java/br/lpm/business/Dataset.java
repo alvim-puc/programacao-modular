@@ -76,26 +76,83 @@ public class Dataset {
   private float maxFloatCalc(String atributo, Pessoa p, float res) {
     return switch (atributo) {
       case "altura" -> p.getAltura() > res ? p.getAltura() : res;
-      case "peso" -> p.getPeso() > res ? p.getPeso() : res;
       case "renda" -> p.getRenda() > res ? p.getRenda() : res;
       default -> res;
     };
   }
 
+  private float minFloatCalc(String atributo, Pessoa p, float res) {
+    return switch (atributo) {
+      case "altura" -> p.getAltura() < res ? p.getAltura() : res;
+      case "renda" -> p.getRenda() < res ? p.getRenda() : res;
+      default -> res;
+    };
+  }
+
+  private float avgFloatCalc(String atributo, Pessoa p) {
+    return switch (atributo) {
+      case "altura" -> p.getAltura();
+      case "renda" -> p.getRenda();
+      default -> 0;
+    };
+  }
+
   private float floatCalcs(String calculo, String atributo) {
-      float res;
-      for (int i = 0; i < qtdPessoas; i++) {
-        switch (calculo) {
-          case "MAX" -> {
-            res = maxFloatCalc(atributo, pessoas[i], res);
-          }
-          case "MIN" -> {
-            res = Float.MAX_VALUE;
-            res = res < pessoas[i].getAltura() ? res : pessoas[i].getAltura();
-          }
-          case "AVG" -> res += avgFloat();
+    float res = calculo.equals("MAX") ? Float.MIN_VALUE : calculo.equals("MIN") ? Float.MAX_VALUE : 0;
+
+    for (int i = 0; i < qtdPessoas; i++) {
+      switch (calculo) {
+        case "MAX" -> {
+          res = maxFloatCalc(atributo, pessoas[i], res);
         }
+        case "MIN" -> {
+          res = minFloatCalc(atributo, pessoas[i], res);
+        }
+        case "AVG" -> res += avgFloatCalc(atributo, pessoas[i]);
       }
+    }
+
+    return calculo.equals("AVG") ? res / qtdPessoas : res;
+  }
+
+  private int maxIntCalc(String atributo, Pessoa p, int res) {
+    return switch (atributo) {
+      case "peso" -> p.getPeso() > res ? p.getPeso() : res;
+      case "idade" -> p.getIdade() > res ? p.getIdade() : res;
+      default -> res;
+    };
+  }
+
+  private int minIntCalc(String atributo, Pessoa p, int res) {
+    return switch (atributo) {
+      case "peso" -> p.getPeso() < res ? p.getPeso() : res;
+      case "idade" -> p.getIdade() < res ? p.getIdade() : res;
+      default -> res;
+    };
+  }
+
+  private int avgIntCalc(String atributo, Pessoa p) {
+    return switch (atributo) {
+      case "peso" -> p.getPeso();
+      case "idade" -> p.getIdade();
+      default -> 0;
+    };
+  }
+
+  private int intCalcs(String calculo, String atributo) {
+    int res = calculo.equals("MAX") ? Integer.MIN_VALUE : calculo.equals("MIN") ? Integer.MAX_VALUE : 0;
+
+    for (int i = 0; i < qtdPessoas; i++) {
+      switch (calculo) {
+        case "MAX" -> {
+          res = maxIntCalc(atributo, pessoas[i], res);
+        }
+        case "MIN" -> {
+          res = minIntCalc(atributo, pessoas[i], res);
+        }
+        case "AVG" -> res += avgIntCalc(atributo, pessoas[i]);
+      }
+    }
 
     return calculo.equals("AVG") ? res / qtdPessoas : res;
   }
@@ -116,17 +173,24 @@ public class Dataset {
     return alturaCalcs("AVG");
   }
 
-  private int pesoCalcs(String calculo) {
-    int res = pessoas[0].getPeso();
-    for (int i = 0; i < qtdPessoas; i++) {
-      switch (calculo) {
-        case "MAX" -> res = res > pessoas[i].getPeso() ? res : pessoas[i].getPeso();
-        case "MIN" -> res = res < pessoas[i].getPeso() ? res : pessoas[i].getPeso();
-        case "AVG" -> res += pessoas[++i].getPeso();
-      }
-    }
+  private float rendaCalcs(String calculo) {
+    return floatCalcs(calculo, "renda");
+  }
 
-    return calculo.equals("AVG") ? res / qtdPessoas : res;
+  public float maxRenda() {
+    return rendaCalcs("MAX");
+  }
+
+  public float minRenda() {
+    return rendaCalcs("MIN");
+  }
+
+  public float avgRenda() {
+    return rendaCalcs("AVG");
+  }
+
+  private int pesoCalcs(String calculo) {
+    return intCalcs(calculo, "peso");
   }
 
   public int maxPeso() {
@@ -139,6 +203,22 @@ public class Dataset {
 
   public int avgPeso() {
     return pesoCalcs("AVG");
+  }
+
+  private int idadeCalcs(String calculo) {
+    return intCalcs(calculo, "idade");
+  }
+
+  public int minIdade() {
+    return idadeCalcs("MIN");
+  }
+
+  public int maxIdade() {
+    return idadeCalcs("MAX");
+  }
+
+  public int avgIdade() {
+    return idadeCalcs("AVG");
   }
 
   private float percentFloats(String atributo) {
@@ -179,7 +259,7 @@ public class Dataset {
 
     return percent / qtdPessoas;
   }
-  
+
   public float percentGenero(Genero genero) {
     return percentEnums(genero);
   }
@@ -245,7 +325,7 @@ public class Dataset {
 
     return mode;
   }
-  
+
   public EstadoCivil modeEstadoCivil() {
     return (EstadoCivil) modeEnums("EstadoCivil");
   }
@@ -253,17 +333,16 @@ public class Dataset {
   public Escolaridade modeEscolaridade() {
     return (Escolaridade) modeEnums("Escolaridade");
   }
-  
+
   public Genero modeGenero() {
     return (Genero) modeEnums("Genero");
   }
-  
+
   public Moradia modeMoradia() {
     return (Moradia) modeEnums("Moradia");
   }
-  
+
   public Hobby modeHobby() {
     return (Hobby) modeEnums("Hobby");
   }
-
 }
