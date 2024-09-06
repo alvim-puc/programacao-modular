@@ -4,6 +4,7 @@ public class Dataset {
   private static final int MAX_PESSOAS = 55;
   private static Pessoa[] pessoas = new Pessoa[MAX_PESSOAS];
   private int qtdPessoas = 0;
+  private DistanceMeasure distanceMeasure = new DistanceMeasure(this);
 
   public int getMaxPessoas() {
     return MAX_PESSOAS;
@@ -60,6 +61,16 @@ public class Dataset {
     return null;
   }
 
+  public int getPessoaIndex(Pessoa pessoa) {
+    for (int i = 0; i < qtdPessoas; i++) {
+      if (pessoas[i].equals(pessoa)) {
+        return i;
+      }
+    }
+
+    return -1;
+  }
+
   public Pessoa[] getAll() {
     return pessoas;
   }
@@ -98,7 +109,8 @@ public class Dataset {
   }
 
   private float floatCalcs(String calculo, String atributo) {
-    float res = calculo.equals("MAX") ? Float.MIN_VALUE : calculo.equals("MIN") ? Float.MAX_VALUE : 0;
+    float res =
+        calculo.equals("MAX") ? Float.MIN_VALUE : calculo.equals("MIN") ? Float.MAX_VALUE : 0;
 
     for (int i = 0; i < qtdPessoas; i++) {
       switch (calculo) {
@@ -140,7 +152,8 @@ public class Dataset {
   }
 
   private int intCalcs(String calculo, String atributo) {
-    int res = calculo.equals("MAX") ? Integer.MIN_VALUE : calculo.equals("MIN") ? Integer.MAX_VALUE : 0;
+    int res =
+        calculo.equals("MAX") ? Integer.MIN_VALUE : calculo.equals("MIN") ? Integer.MAX_VALUE : 0;
 
     for (int i = 0; i < qtdPessoas; i++) {
       switch (calculo) {
@@ -344,5 +357,60 @@ public class Dataset {
 
   public Hobby modeHobby() {
     return (Hobby) modeEnums("Hobby");
+  }
+
+  public float[] calcDistanceVector(Pessoa pessoa) {
+    float[] distanceVector = new float[qtdPessoas];
+
+    for (int i = 0; i < size(); i++) {
+      distanceVector[i] = distanceMeasure.calcDistance(pessoa, pessoas[i]);
+    }
+
+    return distanceVector;
+  }
+
+  public float[][] calcDistanceMatrix() {
+    float[][] distanceMatrix = new float[qtdPessoas][qtdPessoas];
+
+    for (int i = 0; i < size(); i++) {
+      for (int j = i; j < size(); j++) {
+        if (i == j) {
+          distanceMatrix[i][j] = 0;
+        } else {
+          distanceMatrix[i][j] = distanceMeasure.calcDistance(pessoas[i], pessoas[j]);
+        }
+      }
+    }
+
+    return distanceMatrix;
+  }
+
+  public Pessoa[] getSimilar(Pessoa pessoa, int n) {
+    Pessoa[] similars = new Pessoa[n];
+    float[] distances = calcDistanceVector(pessoa);
+
+    float[] minDistances = new float[n];
+    for (int i = 0; i < n; i++) {
+      minDistances[i] = Float.MAX_VALUE;
+    }
+
+    for (int i = 0; i < size(); i++) {
+      if (i != getPessoaIndex(pessoa)) {
+        for (int j = 0; j < n; j++) {
+          if (distances[i] < minDistances[j]) {
+            for (int k = n - 1; k > j; k--) {
+              minDistances[k] = minDistances[k - 1];
+              similars[k] = similars[k - 1];
+            }
+
+            minDistances[j] = distances[i];
+            similars[j] = pessoas[i];
+            break;
+          }
+        }
+      }
+    }
+
+    return similars;
   }
 }
