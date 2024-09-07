@@ -388,7 +388,7 @@ public class Dataset {
   }
 
   public Pessoa[] getSimilar(Pessoa pessoa, int n) {
-    if (n <= 0 || pessoa == null) {
+    if (n <= 0 || n >= qtdPessoas || pessoa == null) {
       return new Pessoa[0];
     }
 
@@ -399,14 +399,21 @@ public class Dataset {
     Arrays.fill(minDistances, Float.MAX_VALUE);
 
     for (int i = 0; i < size(); i++) {
-      if (i != getPessoaIndex(pessoa) && distances[i] < minDistances[0]) {
+      if (i != getPessoaIndex(pessoa) && distances[i] < minDistances[n - 1]) {
         for (int j = n - 1; j > 0; j--) {
-          minDistances[j] = minDistances[j - 1];
-          similars[j] = similars[j - 1];
+          if (distances[i] < minDistances[j - 1]) {
+            minDistances[j] = minDistances[j - 1];
+            similars[j] = similars[j - 1];
+          } else {
+            minDistances[j] = distances[i];
+            similars[j] = pessoas[i];
+            break;
+          }
         }
-
-        minDistances[0] = distances[i];
-        similars[0] = pessoas[i];
+        if (distances[i] < minDistances[0]) {
+          minDistances[0] = distances[i];
+          similars[0] = pessoas[i];
+        }
       }
     }
 

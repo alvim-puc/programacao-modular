@@ -338,14 +338,43 @@ public class DatasetTest {
   @Test
   void testGetSimilar() {
     dataset.addPessoa(PESSOA1);
+    dataset.addPessoa(DIFF_PESSOA1);
+    dataset.addPessoa(CLONE_PESSOA1);
+    dataset.addPessoa(PESSOA3);
+    dataset.addPessoa(PESSOA2);
+
+    Pessoa[] similares = dataset.getSimilar(PESSOA1, 3);
+
+    assertEquals(CLONE_PESSOA1, similares[0]);
+    assertEquals(PESSOA3, similares[1]);
+    assertEquals(PESSOA2, similares[2]);
+  }
+
+  @Test
+  void testCalcDistanceVector() {
+    dataset.addPessoa(PESSOA1);
     dataset.addPessoa(PESSOA2);
     dataset.addPessoa(PESSOA3);
     dataset.addPessoa(DIFF_PESSOA1);
     dataset.addPessoa(CLONE_PESSOA1);
 
-    Pessoa[] similares = dataset.getSimilar(PESSOA1, 2);
+    float[] distanceVector = dataset.calcDistanceVector(CLONE_PESSOA1);
 
-    assertEquals(CLONE_PESSOA1, similares[0]);
-    assertEquals(PESSOA3, similares[1]);
+    assertEquals(0, distanceVector[0]);
+    assertEquals(0.8f, distanceVector[3], 0.1f);
+  }
+
+  @Test
+  void testCalcDistanceMatrix() {
+    dataset.addPessoa(PESSOA1);
+    dataset.addPessoa(PESSOA2);
+    dataset.addPessoa(PESSOA3);
+    dataset.addPessoa(DIFF_PESSOA1);
+    dataset.addPessoa(CLONE_PESSOA1);
+
+    float[][] distanceMatrix = dataset.calcDistanceMatrix();
+
+    assertEquals(0, distanceMatrix[1][1]);
+    assertEquals(0.8f, distanceMatrix[0][3], 0.1f);
   }
 }
