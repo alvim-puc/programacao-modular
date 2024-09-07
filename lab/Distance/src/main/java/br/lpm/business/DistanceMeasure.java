@@ -70,7 +70,7 @@ public class DistanceMeasure {
     return Math.abs(distance);
   }
 
-  private boolean xand(boolean a, boolean b) {
+  private boolean XAND(boolean a, boolean b) {
     return !(a ^ b);
   }
 
@@ -90,8 +90,8 @@ public class DistanceMeasure {
             case 6 -> getNumericDistance("altura", first, second);
             case 7 -> getNumericDistance("idade", first, second);
             case 8 -> getNumericDistance("renda", first, second);
-            case 9 -> xand(first.isFeliz(), second.isFeliz()) ? 0 : 1;
-            default -> 1;
+            case 9 -> XAND(first.isFeliz(), second.isFeliz()) ? 0 : 1;
+            default -> Float.MIN_NORMAL;
           };
       sum += atributesDistances[i] * atributesDistances[i];
     }

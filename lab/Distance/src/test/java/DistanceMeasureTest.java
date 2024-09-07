@@ -1,5 +1,4 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import br.lpm.business.Dataset;
 import br.lpm.business.DistanceMeasure;
@@ -106,7 +105,7 @@ public class DistanceMeasureTest {
         0, distancia, "Pessoa 1 é idêntica ao seu clone, tirando claro o nome e a naturalidade");
 
     distancia = distanceMeasure.calcDistance(PESSOA1, DIFF_PESSOA1);
-    assertTrue(distancia > 0);
+    assertEquals(0.8f, distancia, 0.1);
   }
 
   @Test

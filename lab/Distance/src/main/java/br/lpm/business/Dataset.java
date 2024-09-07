@@ -1,5 +1,7 @@
 package br.lpm.business;
 
+import java.util.Arrays;
+
 public class Dataset {
   private static final int MAX_PESSOAS = 55;
   private static Pessoa[] pessoas = new Pessoa[MAX_PESSOAS];
@@ -386,28 +388,25 @@ public class Dataset {
   }
 
   public Pessoa[] getSimilar(Pessoa pessoa, int n) {
+    if (n <= 0 || pessoa == null) {
+      return new Pessoa[0];
+    }
+
     Pessoa[] similars = new Pessoa[n];
     float[] distances = calcDistanceVector(pessoa);
 
     float[] minDistances = new float[n];
-    for (int i = 0; i < n; i++) {
-      minDistances[i] = Float.MAX_VALUE;
-    }
+    Arrays.fill(minDistances, Float.MAX_VALUE);
 
     for (int i = 0; i < size(); i++) {
-      if (i != getPessoaIndex(pessoa)) {
-        for (int j = 0; j < n; j++) {
-          if (distances[i] < minDistances[j]) {
-            for (int k = n - 1; k > j; k--) {
-              minDistances[k] = minDistances[k - 1];
-              similars[k] = similars[k - 1];
-            }
-
-            minDistances[j] = distances[i];
-            similars[j] = pessoas[i];
-            break;
-          }
+      if (i != getPessoaIndex(pessoa) && distances[i] < minDistances[0]) {
+        for (int j = n - 1; j > 0; j--) {
+          minDistances[j] = minDistances[j - 1];
+          similars[j] = similars[j - 1];
         }
+
+        minDistances[0] = distances[i];
+        similars[0] = pessoas[i];
       }
     }
 
