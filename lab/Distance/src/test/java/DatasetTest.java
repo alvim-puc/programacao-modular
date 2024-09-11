@@ -50,6 +50,35 @@ public class DatasetTest {
           Moradia.CASA_PROPRIA,
           Hobby.ESPORTE,
           true);
+  private static final Pessoa CLONE_PESSOA1 =
+      new Pessoa(
+          "josé",
+          1.76f,
+          70,
+          2000,
+          LocalDate.parse("1992-04-02"),
+          "Diamantino",
+          Genero.MASCULINO,
+          EstadoCivil.SEPARADO,
+          Escolaridade.FUNDAMENTAL,
+          Moradia.ALUGUEL,
+          Hobby.NENHUM,
+          false);
+
+  private static final Pessoa DIFF_PESSOA1 =
+      new Pessoa(
+          "maria",
+          1.67f,
+          60,
+          20000,
+          LocalDate.parse("1894-04-02"),
+          "Nova Limense",
+          Genero.FEMININO,
+          EstadoCivil.SOLTEIRO,
+          Escolaridade.SUPERIOR,
+          Moradia.COM_FAMILIA,
+          Hobby.CULINARIA,
+          true);
 
   @BeforeEach
   public void setUp() {
@@ -304,5 +333,60 @@ public class DatasetTest {
     assertEquals(3, dataset.size());
     dataset.addPessoa(PESSOA1);
     assertEquals(3, dataset.size());
+  }
+
+  @Test
+  void testGetSimilar() {
+    dataset.addPessoa(PESSOA1);
+    dataset.addPessoa(DIFF_PESSOA1);
+    dataset.addPessoa(CLONE_PESSOA1);
+    dataset.addPessoa(PESSOA3);
+    dataset.addPessoa(PESSOA2);
+
+    Pessoa[] similares = dataset.getSimilar(PESSOA1, 3);
+
+    assertEquals(CLONE_PESSOA1, similares[0]);
+    assertEquals(PESSOA3, similares[1]);
+    assertEquals(PESSOA2, similares[2]);
+  }
+
+  @Test
+  void testCalcDistanceVector() {
+    dataset.addPessoa(PESSOA1);
+    dataset.addPessoa(PESSOA2);
+    dataset.addPessoa(PESSOA3);
+    dataset.addPessoa(DIFF_PESSOA1);
+    dataset.addPessoa(CLONE_PESSOA1);
+
+    float[] distanceVector = dataset.calcDistanceVector(CLONE_PESSOA1);
+
+    assertEquals(0, distanceVector[0]);
+    assertEquals(0.8f, distanceVector[3], 0.1f);
+  }
+
+  @Test
+  void testCalcDistanceMatrix() {
+    dataset.addPessoa(PESSOA1);
+    dataset.addPessoa(PESSOA2);
+    dataset.addPessoa(PESSOA3);
+    dataset.addPessoa(DIFF_PESSOA1);
+    dataset.addPessoa(CLONE_PESSOA1);
+
+    float[][] distanceMatrix = dataset.calcDistanceMatrix();
+
+    assertEquals(0, distanceMatrix[1][1]);
+    assertEquals(0.8f, distanceMatrix[0][3], 0.1f);
+  }
+
+  @Test
+  void testNormalizeField() {
+    dataset.addPessoa(PESSOA1);
+    dataset.addPessoa(PESSOA2);
+    float[] normalizado = dataset.normalizeField("renda");
+    float expected =
+        (PESSOA2.getRenda() - PESSOA1.getRenda()) / (PESSOA2.getRenda() - PESSOA1.getRenda());
+
+    assertEquals(0, normalizado[0]);
+    assertEquals(expected, normalizado[1]);
   }
 }
