@@ -8,58 +8,12 @@ public class DistanceMeasure {
     this.dataset = dataset;
   }
 
-  public float[] normalizeField(String fieldName) {
-    Pessoa[] pessoas = this.dataset.getAll();
-    float[] normalized = new float[dataset.size()];
-    float max, min;
-
-    switch (fieldName) {
-      case "peso" -> {
-        max = dataset.maxPeso();
-        min = dataset.minPeso();
-      }
-      case "altura" -> {
-        max = dataset.maxAltura();
-        min = dataset.minAltura();
-      }
-      case "idade" -> {
-        max = dataset.maxIdade();
-        min = dataset.minIdade();
-      }
-      case "renda" -> {
-        max = dataset.maxRenda();
-        min = dataset.minRenda();
-      }
-      default -> {
-        return normalized;
-      }
-    }
-
-    if (max == min) {
-      for (int i = 0; i < normalized.length; i++) {
-        normalized[i] = 0;
-      }
-      return normalized;
-    }
-
-    for (int i = 0; i < normalized.length; i++) {
-      switch (fieldName) {
-        case "peso" -> normalized[i] = (pessoas[i].getPeso() - min) / (max - min);
-        case "altura" -> normalized[i] = (pessoas[i].getAltura() - min) / (max - min);
-        case "idade" -> normalized[i] = (pessoas[i].getIdade() - min) / (max - min);
-        case "renda" -> normalized[i] = (pessoas[i].getRenda() - min) / (max - min);
-      }
-    }
-
-    return normalized;
-  }
-
   private int getEnumDistance(Enum<?> e1, Enum<?> e2) {
     return e1 == e2 ? 0 : 1;
   }
 
   private float getNumericDistance(String fieldName, Pessoa first, Pessoa second) {
-    float[] normalized = normalizeField(fieldName);
+    float[] normalized = dataset.normalizeField(fieldName);
     float distance = 0;
 
     int firstIndex = dataset.getPessoaIndex(first);
@@ -75,29 +29,19 @@ public class DistanceMeasure {
   }
 
   public float calcDistance(Pessoa first, Pessoa second) {
-    float[] atributesDistances = new float[QTD_ATRIBUTOS];
-    float sum = 0;
+    double distance = 0;
 
-    for (int i = 0; i < atributesDistances.length; i++) {
-      atributesDistances[i] =
-          switch (i) {
-            case 0 -> getEnumDistance(first.getEscolaridade(), second.getEscolaridade());
-            case 1 -> getEnumDistance(first.getEstadoCivil(), first.getEstadoCivil());
-            case 2 -> getEnumDistance(first.getMoradia(), second.getMoradia());
-            case 3 -> getEnumDistance(first.getGenero(), second.getGenero());
-            case 4 -> getEnumDistance(first.getHobby(), second.getHobby());
-            case 5 -> getNumericDistance("peso", first, second);
-            case 6 -> getNumericDistance("altura", first, second);
-            case 7 -> getNumericDistance("idade", first, second);
-            case 8 -> getNumericDistance("renda", first, second);
-            case 9 -> XAND(first.isFeliz(), second.isFeliz()) ? 0 : 1;
-            default -> Float.MIN_NORMAL;
-          };
-      sum += atributesDistances[i] * atributesDistances[i];
-    }
+    distance += Math.pow(getEnumDistance(first.getEscolaridade(), second.getEscolaridade()), 2);
+    distance += Math.pow(getEnumDistance(first.getEstadoCivil(), first.getEstadoCivil()), 2);
+    distance += Math.pow(getEnumDistance(first.getMoradia(), second.getMoradia()), 2);
+    distance += Math.pow(getEnumDistance(first.getGenero(), second.getGenero()), 2);
+    distance += Math.pow(getEnumDistance(first.getHobby(), second.getHobby()), 2);
+    distance += Math.pow(getNumericDistance("peso", first, second), 2);
+    distance += Math.pow(getNumericDistance("idade", first, second), 2);
+    distance += Math.pow(getNumericDistance("renda", first, second), 2);
+    distance += Math.pow(getNumericDistance("altura", first, second), 2);
+    distance += XAND(first.isFeliz(), second.isFeliz()) ? 0 : 1;
 
-    double absoluteDistance = sum;
-
-    return (float) Math.sqrt(absoluteDistance / QTD_ATRIBUTOS);
+    return (float) Math.sqrt(distance / QTD_ATRIBUTOS);
   }
 }

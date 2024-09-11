@@ -419,4 +419,53 @@ public class Dataset {
 
     return similars;
   }
+
+  public float[] normalizeField(String fieldName) {
+    if(qtdPessoas <= 0){
+      return new float[0];
+    }
+
+    float[] normalized = new float[qtdPessoas];
+    float max, min;
+
+    switch (fieldName) {
+      case "peso" -> {
+        max = this.maxPeso();
+        min = this.minPeso();
+      }
+      case "altura" -> {
+        max = this.maxAltura();
+        min = this.minAltura();
+      }
+      case "idade" -> {
+        max = this.maxIdade();
+        min = this.minIdade();
+      }
+      case "renda" -> {
+        max = this.maxRenda();
+        min = this.minRenda();
+      }
+      default -> {
+        return normalized;
+      }
+    }
+
+    if (max == min) {
+      for (int i = 0; i < normalized.length; i++) {
+        normalized[i] = 0;
+      }
+      return normalized;
+    }
+
+    for (int i = 0; i < normalized.length; i++) {
+      switch (fieldName) {
+        case "peso" -> normalized[i] = (pessoas[i].getPeso() - min) / (max - min);
+        case "altura" -> normalized[i] = (pessoas[i].getAltura() - min) / (max - min);
+        case "idade" -> normalized[i] = (pessoas[i].getIdade() - min) / (max - min);
+        case "renda" -> normalized[i] = (pessoas[i].getRenda() - min) / (max - min);
+      }
+    }
+
+    return normalized;
+  }
 }

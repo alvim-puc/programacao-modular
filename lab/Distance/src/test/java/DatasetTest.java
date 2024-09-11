@@ -377,4 +377,16 @@ public class DatasetTest {
     assertEquals(0, distanceMatrix[1][1]);
     assertEquals(0.8f, distanceMatrix[0][3], 0.1f);
   }
+
+  @Test
+  void testNormalizeField() {
+    dataset.addPessoa(PESSOA1);
+    dataset.addPessoa(PESSOA2);
+    float[] normalizado = dataset.normalizeField("renda");
+    float expected =
+        (PESSOA2.getRenda() - PESSOA1.getRenda()) / (PESSOA2.getRenda() - PESSOA1.getRenda());
+
+    assertEquals(0, normalizado[0]);
+    assertEquals(expected, normalizado[1]);
+  }
 }
