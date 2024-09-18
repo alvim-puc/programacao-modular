@@ -3,21 +3,32 @@ package br.lpm.business;
 import java.time.LocalDate;
 
 public class Manutencao {
-  private LocalDate dataEntrega;
-  private Veiculo veiculo;
+    Veiculo veiculo;
+    LocalDate previsao;
 
-  public LocalDate getDataEntrega() {
-    return dataEntrega;
-  }
-  public Veiculo getVeiculo() {
-    return veiculo;
-  }
-  
-  public Manutencao(LocalDate dataEntrega, Veiculo veiculo) {
-    this.veiculo = veiculo;
-    if (dataEntrega.isAfter(LocalDate.now().minusDays(1))) {
-      this.dataEntrega = dataEntrega;
+    public Veiculo getVeiculo() {
+        return veiculo;
     }
-  }
-  
+
+    public void setVeiculo(Veiculo veiculo) {
+        this.veiculo = veiculo;
+    }
+
+    public LocalDate getPrevisao() {
+        return previsao;
+    }
+
+    public void setPrevisao(LocalDate previsao) {
+        if (previsao.isAfter(LocalDate.now())) {
+            this.previsao = previsao;
+        } else {
+            this.previsao = LocalDate.now().plusDays(7);
+        }
+    }
+
+    public Manutencao(Veiculo veiculo, LocalDate previsao) {
+        this.setVeiculo(veiculo);
+        this.setPrevisao(previsao);
+    }
+
 }

@@ -1,43 +1,80 @@
 package br.lpm.business;
 
+import java.time.LocalDate;
+
 public class Oficina {
-  private String nome;
-  private String addr;
-  private static int qtdEmManutencao = 0;
-  private static final int MAX_EM_MANUTENCAO = 100;
-  private Manutencao[] manutencoes = new Manutencao[MAX_EM_MANUTENCAO];
-  
-  public String getNome() {
-    return nome;
-  }
-  public String getAddr() {
-    return addr;
-  }
-  public static int getQtdEmManutencao() {
-    return qtdEmManutencao;
-  }
-  public static int getMaxEmManutencao() {
-    return MAX_EM_MANUTENCAO;
-  }
-  public Manutencao[] getManutencoes() {
-    return manutencoes;
-  }
+    private static final int MAX_VEICULOS = 1000;
+    private String nome;
+    private String endereco;
+    private Manutencao[] manutencoes = new Manutencao[Oficina.MAX_VEICULOS];
+    private int numManutencoes = 0;
 
-  public void addEmTransito(Manutencao manutencao) {
-    if (qtdEmManutencao + Transito.getQtdEmTransito() < MAX_EM_MANUTENCAO
-        && manutencao.getVeiculo().getEstado() != Estado.MANUTENÇÃO) {
-      manutencoes[qtdEmManutencao] = manutencao;
-      qtdEmManutencao++;
+    public String getNome() {
+        return nome;
     }
-  }
 
-  public void entregaVeiculo(Veiculo veiculo) {
-    for (int i = 0; i < qtdEmManutencao; i++) {
-      if (veiculo.equals(manutencoes[i].getVeiculo())) {
-        manutencoes[i] = null;
-        break;
-      }
+    public void setNome(String nome) {
+        this.nome = nome;
     }
-    qtdEmManutencao--;
-  }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public int getNumManutencoes() {
+        return numManutencoes;
+    }
+
+    public Manutencao[] getAllManutencoes() {
+        return manutencoes;
+    }
+
+    public Manutencao getLastManutencaoFromVeiculo(Veiculo veiculo) {
+        if (numManutencoes == 0) {
+            return null;
+        } else {
+            for (int i = numManutencoes - 1; i >= 0; i++) {
+                if (manutencoes[i].getVeiculo().equals(veiculo)) {
+                    return manutencoes[i];
+                }
+            }
+            return null;
+        }
+    }
+
+    public void addVeiculoToManutencao(Veiculo veiculo) {
+        if (numManutencoes < Oficina.MAX_VEICULOS) {
+            // Veículo já está em manutenção
+            if (veiculo.getEstado().equals(Estado.MANUTENCAO)) {
+                return;
+            } else {
+                veiculo.setEstado(Estado.MANUTENCAO);
+                Manutencao manutencao = new Manutencao(veiculo, LocalDate.now().plusDays(7));
+                manutencoes[numManutencoes++] = manutencao;
+            }
+        }
+    }
+
+    public void removeVeiculoFromManutencao(Veiculo veiculo) {
+        for (int i = 0; i < numManutencoes; i++) {
+            if (manutencoes[i].getVeiculo().equals(veiculo)) {
+                veiculo.setEstado(Estado.TRANSITO);
+                for (int j = i + 1; j < numManutencoes; j++) {
+                    manutencoes[j - 1] = manutencoes[j];
+                }
+                manutencoes[numManutencoes--] = null;
+                return;
+            }
+        }
+    }
+
+    public Oficina(String nome, String endereco) {
+        this.nome = nome;
+        this.endereco = endereco;
+    }
+
 }

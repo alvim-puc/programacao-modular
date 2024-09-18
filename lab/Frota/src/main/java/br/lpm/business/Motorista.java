@@ -1,31 +1,26 @@
 package br.lpm.business;
 
 public class Motorista {
-  private int id;
-  private String nome;
-  private Veiculo veiculo;
+    private String nome;
+    private int id;
+    private static int cont = 0;
+    
+    public String getNome() {
+        return nome;
+    }
 
-  public Motorista(int id, String nome, Veiculo veiculo) {
-    this.id = id;
-    this.nome = nome;
-    this.veiculo = veiculo;
-  }
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-  public String getNome() {
-    return nome;
-  }
-  public void setNome(String nome) {
-    this.nome = nome;
-  }
-  public int getId() {
-    return id;
-  }
-  public Veiculo getVeiculo() {
-    return veiculo;
-  }
-  public void replaceVeiculo(Veiculo veiculo) {
-    this.veiculo = veiculo;
-  }
-  
-  
+    public int getId() {
+        return id;
+    }
+
+    public Motorista(String nome) {
+        this.nome = nome;
+        this.id = ++cont;
+    }
+
+    
 }

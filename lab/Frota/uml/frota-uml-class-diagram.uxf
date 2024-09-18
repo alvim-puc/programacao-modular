@@ -1,0 +1,69 @@
+<diagram program="umletino" version="15.1"><zoom_level>9</zoom_level><element><id>UMLClass</id><coordinates><x>216</x><y>90</y><w>135</w><h>90</h></coordinates><panel_attributes>Veiculo
+--
+-modelo: String
+-ano: int
+-placa: String
+-km: int
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>54</x><y>90</y><w>108</w><h>63</h></coordinates><panel_attributes>&lt;&lt;enum&gt;&gt;
+Estado
+--
++TRANSITO
++MANUTENCAO
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>153</x><y>90</y><w>81</w><h>45</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=1
+m2=1
+m2pos=-15,0
+</panel_attributes><additional_attributes>70;20;10;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>306</x><y>198</y><w>135</w><h>81</h></coordinates><panel_attributes>Funcionario
+--
+-nome: String
+-id: int
+_-cont: int_
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>162</x><y>216</y><w>108</w><h>81</h></coordinates><panel_attributes>Rota
+--
+-origem: String
+-destino: String
+-data: LocalDate
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>279</x><y>171</y><w>45</w><h>81</h></coordinates><panel_attributes>lt=-
+m1=*
+m2=*</panel_attributes><additional_attributes>30;70;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>261</x><y>225</y><w>36</w><h>117</h></coordinates><panel_attributes>lt=.
+</panel_attributes><additional_attributes>20;110;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>459</x><y>279</y><w>315</w><h>135</h></coordinates><panel_attributes>Oficina
+--
+-nome: String
+-endereco: String
+--
++getNumManutencoes(): int
++getAllManutencoes(): Manutencao[ ]
++getLastManutencaoFromVeiculo( : Veiculo): Manutencao
++addVeiculoToManutencao?( : Veiculo)
++removeVeiculoFromManutencao( : Veiculo)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>531</x><y>90</y><w>135</w><h>54</h></coordinates><panel_attributes>Manutencao
+--
+-previsao: LocalDate
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>585</x><y>135</y><w>36</w><h>162</h></coordinates><panel_attributes>lt=-
+m1=1
+m2=*</panel_attributes><additional_attributes>10;160;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>342</x><y>90</y><w>207</w><h>36</h></coordinates><panel_attributes>lt=-
+m1=*
+m2=1</panel_attributes><additional_attributes>210;10;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>72</x><y>387</y><w>351</w><h>126</h></coordinates><panel_attributes>Frota
+--
+
+--
++getAllVeiculos(): Veiculo[] 
++addVeiculo( : Veiculo) 
++getVeiculoByPlaca(placa: String): Veiculo
++removeVeiculoByPlaca(placa: String)
++replaceVeiculo(old: Veiculo, new: Veiculo)
++newRota(: Motorista, : Veiculo, origem: String , destino: String )
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>189</x><y>288</y><w>36</w><h>117</h></coordinates><panel_attributes>lt=-
+m1=1
+m2=*</panel_attributes><additional_attributes>10;110;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>81</x><y>162</y><w>153</w><h>243</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=1
+m2=*
+gerencia &gt;</panel_attributes><additional_attributes>10;250;10;10;150;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>225</x><y>324</y><w>144</w><h>27</h></coordinates><panel_attributes>Motorista
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>450</x><y>162</y><w>144</w><h>27</h></coordinates><panel_attributes>Mecânicio
+--</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>459</x><y>180</y><w>144</w><h>90</h></coordinates><panel_attributes>lt=.
+</panel_attributes><additional_attributes>140;10;10;80</additional_attributes></element><element><id>Relation</id><coordinates><x>432</x><y>225</y><w>108</w><h>72</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>100;60;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>288</x><y>207</y><w>36</w><h>135</h></coordinates><panel_attributes>lt=.
+</panel_attributes><additional_attributes>10;130;20;10</additional_attributes></element></diagram>

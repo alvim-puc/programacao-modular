@@ -1,52 +1,45 @@
-<diagram program="umletino" version="15.1"><zoom_level>9</zoom_level><element><id>UMLClass</id><coordinates><x>342</x><y>279</y><w>189</w><h>171</h></coordinates><panel_attributes>&lt;&lt;class&gt;&gt;
-Veículo
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>200</x><y>0</y><w>150</w><h>100</h></coordinates><panel_attributes>Veiculo
 --
 -modelo: String
 -ano: int
--quilometragem: float
 -placa: String
--estado: Estado
---</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>45</x><y>279</y><w>189</w><h>171</h></coordinates><panel_attributes>&lt;&lt;class&gt;&gt;
-Motorista
+-km: int
 --
--nome: String
--id: int
--veiculoAtual: Veiculo
---
-+replaceVeiculo() : void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>639</x><y>279</y><w>189</w><h>171</h></coordinates><panel_attributes>&lt;&lt;class&gt;&gt;
-Ofincina
---
--manutencoes: Manutencao[]
--nome: String
--addr: String
---</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>639</x><y>36</y><w>189</w><h>171</h></coordinates><panel_attributes>&lt;&lt;class&gt;&gt;
-Manutencao
---
--veiculo: Veiculo
--dataEntrega: LocalDate
---</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>342</x><y>36</y><w>189</w><h>171</h></coordinates><panel_attributes>&lt;&lt;class&gt;&gt;
-Transito
---
--veiculos: Veiculo[]
--rotas: Rota[]
---</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>54</x><y>36</y><w>189</w><h>171</h></coordinates><panel_attributes>&lt;&lt;class&gt;&gt;
-Rota
---
-origem: String
-destino: String
-data: LocalDate
---</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>225</x><y>333</y><w>135</w><h>36</h></coordinates><panel_attributes>lt=&lt;-
-m1=0..1</panel_attributes><additional_attributes>130;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>234</x><y>117</y><w>126</w><h>36</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
-m1= 1
-m2= 0..n </panel_attributes><additional_attributes>120;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>522</x><y>198</y><w>135</w><h>99</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
-m1= 1
-m2= 1</panel_attributes><additional_attributes>10;90;130;10</additional_attributes></element><element><id>Relation</id><coordinates><x>432</x><y>198</y><w>54</w><h>99</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
-m1= 1
-m2= 0..n </panel_attributes><additional_attributes>10;10;10;90</additional_attributes></element><element><id>Relation</id><coordinates><x>729</x><y>198</y><w>45</w><h>99</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
-m1= 0..n
-m2= 1</panel_attributes><additional_attributes>10;10;10;90</additional_attributes></element><element><id>UMLClass</id><coordinates><x>342</x><y>504</y><w>189</w><h>63</h></coordinates><panel_attributes>&lt;&lt;enum&gt;&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>20</x><y>0</y><w>120</w><h>80</h></coordinates><panel_attributes>&lt;&lt;enum&gt;&gt;
 Estado
 --
 +TRANSITO
-+MANUTENCAO</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>423</x><y>441</y><w>54</w><h>81</h></coordinates><panel_attributes>lt=.&gt;
-&lt;&lt;use&gt;&gt;</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element></diagram>
++MANUTENCAO
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>130</x><y>0</y><w>90</w><h>50</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m1=1
+m2=1
+m2pos=-15,0
+</panel_attributes><additional_attributes>70;20;10;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>200</x><y>270</y><w>150</w><h>90</h></coordinates><panel_attributes>Motorista
+--
+-nome: String
+-id: int
+_-cont: int_
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>120</x><y>140</y><w>120</w><h>90</h></coordinates><panel_attributes>Rota
+--
+-origem: String
+-destino: String
+-data: LocalDate
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>270</x><y>90</y><w>40</w><h>200</h></coordinates><panel_attributes>lt=-
+m1=*
+m2=*</panel_attributes><additional_attributes>10;180;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>230</x><y>150</y><w>70</w><h>50</h></coordinates><panel_attributes>lt=.
+</panel_attributes><additional_attributes>50;30;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>450</x><y>180</y><w>150</w><h>80</h></coordinates><panel_attributes>Oficina
+--
+-nome: String
+-endereco: String
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>450</x><y>0</y><w>150</w><h>80</h></coordinates><panel_attributes>Manutencao
+--
+-previsao: LocalDate
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>510</x><y>70</y><w>40</w><h>130</h></coordinates><panel_attributes>lt=-
+m1=1
+m2=*</panel_attributes><additional_attributes>10;110;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>340</x><y>0</y><w>130</w><h>40</h></coordinates><panel_attributes>lt=-
+m1=*
+m2=1</panel_attributes><additional_attributes>110;10;10;10</additional_attributes></element></diagram>
