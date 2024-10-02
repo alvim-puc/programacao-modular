@@ -16,6 +16,7 @@ public class Pessoa {
   private Moradia moradia;
   private Hobby hobby;
   private boolean feliz;
+  private int idade;
 
   public Pessoa() {}
 
@@ -88,7 +89,12 @@ public class Pessoa {
   }
 
   public int getIdade() {
-    return Period.between(this.getDataNascimento(), LocalDate.now()).getYears();
+    Period.between(this.getDataNascimento(), LocalDate.now()).getYears();
+    return idade;
+  }
+
+  public void setIdade(int idade) {
+    this.idade = idade;
   }
 
   public LocalDate getDataNascimento() {
@@ -98,6 +104,7 @@ public class Pessoa {
   public void setDataNascimento(LocalDate dataNascimento) {
     if (LocalDate.now().isAfter(dataNascimento)) {
       this.dataNascimento = dataNascimento;
+      this.setIdade(this.getIdade());
     }
   }
 

@@ -13,15 +13,17 @@ public class DistanceMeasure {
   }
 
   private float getNumericDistance(String fieldName, Pessoa first, Pessoa second) {
-    float[] normalized = dataset.normalizeField(fieldName);
-    float distance = 0;
+    Pessoa datasetFirstPerson = dataset.getPessoaByName(first.getNome());
+    Pessoa datasetSecondPerson = dataset.getPessoaByName(second.getNome());
 
-    int firstIndex = dataset.getPessoaIndex(first);
-    int secondIndex = dataset.getPessoaIndex(second);
-
-    distance = normalized[firstIndex] - normalized[secondIndex];
-
-    return Math.abs(distance);
+    return Math.abs(
+        switch (fieldName) {
+          case "peso" -> datasetFirstPerson.getPeso() - datasetSecondPerson.getPeso();
+          case "idade" -> datasetFirstPerson.getIdade() - datasetSecondPerson.getIdade();
+          case "renda" -> datasetFirstPerson.getRenda() - datasetSecondPerson.getRenda();
+          case "altura" -> datasetFirstPerson.getAltura() - datasetSecondPerson.getAltura();
+          default -> 1;
+        });
   }
 
   private boolean XAND(boolean a, boolean b) {

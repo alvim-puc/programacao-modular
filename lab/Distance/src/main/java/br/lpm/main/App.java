@@ -143,7 +143,7 @@ public class App {
               case 2 -> Hobby.ESPORTE.toString();
               case 3 -> Hobby.CINEMA.toString();
               case 4 -> Hobby.LIVRO.toString();
-              case 5 -> Hobby.MUSICA.toString();
+              case 5 -> Hobby.MÚSICA.toString();
               case 6 -> Hobby.CULINARIA.toString();
               case 7 -> Hobby.GAME.toString();
               case 8 -> Hobby.NENHUM.toString();

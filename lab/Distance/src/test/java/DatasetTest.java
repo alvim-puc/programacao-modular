@@ -382,11 +382,11 @@ public class DatasetTest {
   void testNormalizeField() {
     dataset.addPessoa(PESSOA1);
     dataset.addPessoa(PESSOA2);
-    float[] normalizado = dataset.normalizeField("renda");
+    dataset.normalizeField("renda");
     float expected =
         (PESSOA2.getRenda() - PESSOA1.getRenda()) / (PESSOA2.getRenda() - PESSOA1.getRenda());
 
-    assertEquals(0, normalizado[0]);
-    assertEquals(expected, normalizado[1]);
+    assertEquals(0, (dataset.getPessoaByName(PESSOA1.getNome())).getRenda());
+    assertEquals(expected, (dataset.getPessoaByName(PESSOA2.getNome())).getRenda());
   }
 }

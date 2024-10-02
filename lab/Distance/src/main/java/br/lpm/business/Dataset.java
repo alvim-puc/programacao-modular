@@ -1,5 +1,12 @@
 package br.lpm.business;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
 public class Dataset {
@@ -420,12 +427,7 @@ public class Dataset {
     return similars;
   }
 
-  public float[] normalizeField(String fieldName) {
-    if(qtdPessoas <= 0){
-      return new float[0];
-    }
-
-    float[] normalized = new float[qtdPessoas];
+  public void normalizeField(String fieldName) {
     float max, min;
 
     switch (fieldName) {
@@ -446,26 +448,72 @@ public class Dataset {
         min = this.minRenda();
       }
       default -> {
-        return normalized;
+        max = Float.MIN_VALUE;
+        min = Float.MAX_VALUE;
       }
     }
 
-    if (max == min) {
-      for (int i = 0; i < normalized.length; i++) {
-        normalized[i] = 0;
-      }
-      return normalized;
-    }
+    float diff = max == min ? 1 : max - min;
 
-    for (int i = 0; i < normalized.length; i++) {
+    for (int i = 0; i < qtdPessoas; i++) {
       switch (fieldName) {
-        case "peso" -> normalized[i] = (pessoas[i].getPeso() - min) / (max - min);
-        case "altura" -> normalized[i] = (pessoas[i].getAltura() - min) / (max - min);
-        case "idade" -> normalized[i] = (pessoas[i].getIdade() - min) / (max - min);
-        case "renda" -> normalized[i] = (pessoas[i].getRenda() - min) / (max - min);
+        case "peso" -> pessoas[i].setPeso(Math.round((pessoas[i].getPeso() - min) / diff));
+        case "altura" -> pessoas[i].setAltura((pessoas[i].getAltura() - min) / diff);
+        case "idade" ->
+            pessoas[i].setIdade(Math.round((pessoas[i].getIdade() - min) / diff));
+        case "renda" -> pessoas[i].setRenda((pessoas[i].getRenda() - min) / diff);
       }
     }
+  }
 
-    return normalized;
+  public void loadDataFromCSV(String filename) throws Exception {
+
+    try (BufferedReader file = new BufferedReader(new FileReader(filename))) {
+
+      // Remove linha de título
+      String line = file.readLine();
+
+      line = file.readLine();
+
+      DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+      symbols.setDecimalSeparator(',');
+      DecimalFormat format = new DecimalFormat("0.#");
+      format.setDecimalFormatSymbols(symbols);
+
+      while (line != null && this.qtdPessoas < Dataset.MAX_PESSOAS) {
+        String[] fields = line.split(";");
+        String nome = fields[0];
+        LocalDate dataNascimento =
+            LocalDate.parse(fields[1], DateTimeFormatter.ofPattern("M/d/yyyy"));
+        Genero genero = Genero.parseGenero(fields[2]);
+        float altura = format.parse(fields[3]).floatValue();
+        int peso = format.parse(fields[4]).intValue();
+        float renda = format.parse(fields[5]).floatValue();
+        String naturalidade = fields[6];
+        Moradia moradia = Moradia.parseMoradia(fields[7]);
+        EstadoCivil estadoCivil = EstadoCivil.parseEstadoCivil(fields[8]);
+        Escolaridade escolaridade = Escolaridade.parseEscolaridade(fields[9]);
+        Hobby hobby = Hobby.parseHobby(fields[10]);
+        boolean feliz = fields[11].equalsIgnoreCase("Sim");
+
+        pessoas[qtdPessoas++] =
+            new Pessoa(
+                nome,
+                altura,
+                peso,
+                renda,
+                dataNascimento,
+                naturalidade,
+                genero,
+                estadoCivil,
+                escolaridade,
+                moradia,
+                hobby,
+                feliz);
+        line = file.readLine();
+      }
+    } catch (IOException e) {
+
+    }
   }
 }
