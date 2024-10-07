@@ -427,8 +427,8 @@ public class Dataset {
     return similars;
   }
 
-public float[] normalizeField(String fieldName) {
-    if(qtdPessoas <= 0){
+  public float[] normalizeField(String fieldName) {
+    if (qtdPessoas <= 0) {
       return new float[0];
     }
 
@@ -493,7 +493,8 @@ public float[] normalizeField(String fieldName) {
       while (line != null && this.qtdPessoas < Dataset.MAX_PESSOAS) {
         String[] fields = line.split(";");
         String nome = fields[0];
-        LocalDate dataNascimento = LocalDate.parse(fields[1], DateTimeFormatter.ofPattern("M/d/yyyy"));
+        LocalDate dataNascimento =
+            LocalDate.parse(fields[1], DateTimeFormatter.ofPattern("M/d/yyyy"));
         Genero genero = Genero.parseGenero(fields[2]);
         float altura = format.parse(fields[3]).floatValue();
         int peso = format.parse(fields[4]).intValue();
@@ -505,26 +506,27 @@ public float[] normalizeField(String fieldName) {
         Hobby hobby = Hobby.parseHobby(fields[10]);
         boolean feliz = fields[11].equalsIgnoreCase("Sim");
 
-        pessoas[qtdPessoas++] = new Pessoa(
-            nome,
-            altura,
-            peso,
-            renda,
-            dataNascimento,
-            naturalidade,
-            genero,
-            estadoCivil,
-            escolaridade,
-            moradia,
-            hobby,
-            feliz);
+        pessoas[qtdPessoas++] =
+            new Pessoa(
+                nome,
+                altura,
+                peso,
+                renda,
+                dataNascimento,
+                naturalidade,
+                genero,
+                estadoCivil,
+                escolaridade,
+                moradia,
+                hobby,
+                feliz);
         line = file.readLine();
       }
     } catch (IOException e) {
 
     }
   }
-  
+
   @Override
   public String toString() {
     return Arrays.stream(pessoas).map(Pessoa::getNome).reduce("", (a, b) -> a + b + "\n");

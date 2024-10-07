@@ -1,0 +1,124 @@
+<diagram program="umletino" version="15.1"><zoom_level>5</zoom_level><help_text>Space for diagram notes </help_text><element><id>UMLClass</id><coordinates><x>220</x><y>310</y><w>135</w><h>120</h></coordinates><panel_attributes>&lt;&lt;class&gt;&gt;
+br.lpm.business::Pessoa
+--
+-nome: String
+-altura: float
+-renda: float
+-dataNascimento: LocalDate
+-naturalidade: String
+-genero: Genero
+-estadoCivil: EstadoCivil
+-escolaridade: Escolaridade
+-moradia: Moradia
+-hobby: Hobby
+-feliz: boolean
+--
++toString()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>65</x><y>45</y><w>105</w><h>65</h></coordinates><panel_attributes>&lt;&lt;enum&gt;&gt;
+br.lpm.business::Genero
+--
++FEMININO
++MASCULINO
++NAO_BINARIO
++NAO_RESPONDER</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>485</x><y>140</y><w>105</w><h>65</h></coordinates><panel_attributes>&lt;&lt;enum&gt;&gt;
+br.lpm.business::EstadoCivil
+--
++SOLTEIRO
++CASADO
++UNIAO_ESTAVEL
++DIVORCIADO
++SEPARADO
++VIUVO</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>140</y><w>105</w><h>65</h></coordinates><panel_attributes>&lt;&lt;enum&gt;&gt;
+br.lpm.business::Escolaridade
+--
++NENHUNA
++FUNDAMENTAL
++MEDIO
++SUPERIOR
++POS_GRADUACAO</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>390</x><y>55</y><w>105</w><h>65</h></coordinates><panel_attributes>&lt;&lt;enum&gt;&gt;
+br.lpm.business::Moradia
+--
++ALUGUEL
++CASA_PROPRIA
++COM_FAMILIA</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>165</x><y>485</y><w>255</w><h>455</h></coordinates><panel_attributes>&lt;&lt;class&gt;&gt;
+br.lpm.business::Dataset
+--
+_-MAX_PESSOAS = 55_
+_-pessoas: Pessoas[MAX_PESSOAS]_
+-qtdPessoas: int
+--
++addPessoa(p: Pessoa) : void
+-reorganiza(posicaoVazia: int) : void
++removePessoa(p: Pessoa) : void
++removePessoaByName(nome: String) : void
++replacePessoa(velha: Pessoa, nova: Pessoa) : void
++getPessoaByName(nome: String) : Pessoa
++getPessoaIndex(pessoa: Pessoa) : int
++getAll() : Pessoa[]
++removeAll() : void
++size() : int
+-maxFloatCalc(atributo: String, p: Pessoa, res: float) : float
+-minFloatCalc(atributo: String, p: Pessoa, res: float) : float
+-avgFloatCalc(atributo: String, p: Pessoa, res: float) : float
+-floatCalcs(calculo: String, atributo: String) : float
+-alturaCalcs(calculo:String) : float
++maxAltura() : float
++minAltura() : float
++avgAltura() : float
++maxRenda() : float
++minRenda() : float
++avgRenda() : float
+-maxIntCalc(atributo: String, p: Pessoa, res: int) : int
+-minIntCalc(atributo: String, p: Pessoa, res: int) : int
+-avgIntCalc(atributo: String, p: Pessoa, res: int) : int
+-intCalcs(calculo: String, atributo: String) : int
+-pesoCalcs(calculo: String): float
+-idadeCalcs(calculo: String): float
++maxPeso() : int
++minPeso() : int
++avgPeso() : int
++maxIdade() : int
++minIdade() : int
++avgIdade() : int
+-percentFloats(atributo: String) : float
++percentAdult() : float
++percentFeliz() : float
+-percentEnums(valor: Enum&lt;?&gt;) : float
++percentGenero(genero: Genero) : float
++percentEstadoCivil(estadoCivil: EstadoCivil) : float
++percentEscolaridade(escolaridade: Escolaridade) : float
++percentMoradia(moradia: Moradia) : float
++percentHobby(hobby: Hobby) : float
+-modeEnums(tipo: String) : Enum&lt;?&gt;
++modeEstadoCivil() : EstadoCivil
++modeEscolaridade() : Escolaridade
++modeGenero() : Genero
++modeMoradia() : Moradia
++modeHobby() : Hobby
++calcDistanceVector(pessoa: Pessoa) : float[]
++calcDistanceMatrix() : float[][]
++getSimilar(pessoa: Pessoa, n: int) : Pessoa[]
++normalizeField(fieldName: String) : float[]</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>515</x><y>540</y><w>225</w><h>140</h></coordinates><panel_attributes>&lt;&lt;class&gt;&gt;
+br.lpm.business::DistanceMeasure
+--
+-idataset: Dataset
+_-QTD_ATRIBUTOS = 10_
+--
+-getEnumDistance(e1: Enum&lt;?&gt;, e2: Enum&lt;?&gt;) : int
+-getNumericDistance(fieldName: String, first: Pessoa, second: Pessoa) : float
+-XAND(a: boolean, b: boolean) : boolean
++calcDistance(first: Pessoa, second: Pessoa) : float</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>115</x><y>105</y><w>165</w><h>215</h></coordinates><panel_attributes>lt=&lt;..
+&lt;&lt;use&gt;&gt;</panel_attributes><additional_attributes>10;10;310;410</additional_attributes></element><element><id>Relation</id><coordinates><x>295</x><y>115</y><w>140</w><h>205</h></coordinates><panel_attributes>lt=&lt;..
+&lt;&lt;use&gt;&gt;</panel_attributes><additional_attributes>260;10;10;390</additional_attributes></element><element><id>Relation</id><coordinates><x>325</x><y>200</y><w>210</w><h>120</h></coordinates><panel_attributes>lt=&lt;..
+&lt;&lt;use&gt;&gt;</panel_attributes><additional_attributes>400;10;10;220</additional_attributes></element><element><id>Relation</id><coordinates><x>60</x><y>200</y><w>190</w><h>120</h></coordinates><panel_attributes>lt=&lt;..
+&lt;&lt;use&gt;&gt;</panel_attributes><additional_attributes>10;10;360;220</additional_attributes></element><element><id>Relation</id><coordinates><x>415</x><y>605</y><w>110</w><h>15</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;200;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>235</x><y>0</y><w>105</w><h>65</h></coordinates><panel_attributes>&lt;&lt;enum&gt;&gt;
+br.lpm.business::Hobby
+--
++ARTE,
++ESPORTE,
++CINEMA,
++LIVRO,
++MUSICA,
++CULINARIA,
++GAME,
++NENHUM</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>280</x><y>60</y><w>30</w><h>260</h></coordinates><panel_attributes>lt=&lt;..
+&lt;&lt;use&gt;&gt;</panel_attributes><additional_attributes>10;10;10;500</additional_attributes></element><element><id>Relation</id><coordinates><x>280</x><y>425</y><w>15</w><h>70</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;120;10;10</additional_attributes></element></diagram>
